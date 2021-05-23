@@ -24,3 +24,5 @@ export ZSHRC=$HOME/.zshrc
 export XINITRC=$HOME/.xinitrc
 export XRESOURCES=$HOME/.Xresources
 export BIB="$HOME/latex/bibliography.bib"
+
+export PATH="$HOME/.local/bin:$(du "$HOME/.local/bin" | cut -f2 | tr '\n' ':' | sed 's/:*$//'):$PATH:/usr/local/go/bin"
