@@ -1,0 +1,17 @@
+# History Configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
+setopt appendhistory 
+setopt incappendhistory
+
+# Assorted Settings
+unsetopt beep nomatch
+bindkey -v
+setopt promptsubst
+setopt interactive_comments
+
+# Correction Prompt
+setopt correct
+autoload -U colors && colors
+export SPROMPT="Correct $fg[red]%R$reset_color to $fg[green]%r$reset_color? (Yes, No, Abort, Edit) "
