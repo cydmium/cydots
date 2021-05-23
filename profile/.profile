@@ -21,6 +21,7 @@ export LIBGL_ALWAYS_SOFTWARE=1 # Needed for alacritty on virtualbox
 export I3CONF=$HOME/.config/i3/config
 export COMPRC=$HOME/.config/compton.conf
 export ZSHRC=$HOME/.zshrc
+export ZDOTDIR=$HOME/.config/zsh
 export XINITRC=$HOME/.xinitrc
 export XRESOURCES=$HOME/.Xresources
 export BIB="$HOME/latex/bibliography.bib"
