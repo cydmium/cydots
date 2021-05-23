@@ -1,0 +1,4 @@
+source "$ZDOTDIR/zsh-functions"
+
+# Source config files
+zsh_add_file "zsh-aliases"
