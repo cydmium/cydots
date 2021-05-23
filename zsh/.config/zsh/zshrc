@@ -9,9 +9,9 @@ autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
-bindkey "^[[A" up-line-or-beginning-search
-bindkey "^[[B" down-line-or-beginning-search
-
+bindkey "^[OA" up-line-or-beginning-search
+bindkey "^[OB" down-line-or-beginning-search
+ 
 # Edit line in vim with ctrl-e
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
@@ -27,12 +27,12 @@ source "$ZDOTDIR/zsh-functions"
 
 # Source config files
 zsh_add_file "zsh-aliases"
-unsetopt beep nomatch
 zsh_add_file "zsh-options"
+zsh_add_file "zsh-prompt"
 
 # Plugins
-zsh_add_plugins "zsh-users/zsh-autosuggestions"
-zsh_add_plugins "zsh-users/zsh-syntax-highlighting"
+zsh_add_plugin "zsh-users/zsh-autosuggestions"
+zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
 
 # Autosuggest Settings
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
@@ -73,8 +73,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PATH:$PYENV_ROOT/bin"
 export WORKON_HOME=~/.ve
 export PROJECT_HOME=~/projects
-eval "$(pyenv init -)"
+eval "$(pyenv init - --no-rehash zsh)"
 pyenv virtualenvwrapper_lazy
 
 # NPM
-export PATH="$PATH:$HOME/.npm-global/bin"
+export PATH="$HOME/.npm-global/bin:$PATH"

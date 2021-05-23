@@ -2,6 +2,8 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=5000
 SAVEHIST=5000
+stty stop undef
+stty start undef
 setopt appendhistory 
 setopt incappendhistory
 
