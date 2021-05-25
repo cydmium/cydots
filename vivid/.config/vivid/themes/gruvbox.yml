@@ -1,0 +1,124 @@
+colors:
+  # Theme colors
+  background: '282828'
+  darkred: 'cc241d'
+  darkgreen: '98971a'
+  darkyellow: 'd79921'
+  darkblue: '458588'
+  darkpurple: 'b16286'
+  darkcyan: '689d6a'
+  darkgray: '928374'
+  darkorange: 'd65d0e'
+
+  gray: 'a89984'
+  red: 'fb4934'
+  green: 'b8bb26'
+  yellow: 'fabd2f'
+  blue: '83a598'
+  purple: 'd3869b'
+  cyan: '8ec07c'
+  foreground: 'ebdbb2'
+  orange: 'fe8019'
+
+  # Others
+  white: "ffffff"
+  black: "1d2021"
+  gold: "b3a369"
+  khaki: "f0e68c"
+  dimgray: "504945"
+  brightgreen: "93bb26"
+
+core:
+  regular_file: {}
+
+  directory:
+    foreground: blue
+
+  executable_file:
+    foreground: green
+    font-style: bold
+
+  symlink:
+    foreground: purple
+
+  broken_symlink:
+    foreground: black
+    background: red
+  missing_symlink_target:
+    foreground: black
+    background: red
+
+  fifo:
+    foreground: black
+    background: cyan
+
+  socket:
+    foreground: black
+    background: purple
+
+  character_device:
+    foreground: purple
+    background: darkgray
+
+  block_device:
+    foreground: cyan
+    background: darkgray
+
+  normal_text:
+    {}
+
+  sticky:
+    {}
+
+  sticky_other_writable:
+    {}
+
+  other_writable:
+    {}
+
+text:
+  special:
+    foreground: background
+    background: khaki
+
+  todo:
+    font-style: bold
+
+  licenses:
+    foreground: gray
+
+  configuration:
+    foreground: purple
+
+  other:
+    foreground: darkyellow
+
+markup:
+  foreground: gold
+
+programming:
+  source:
+    foreground: yellow
+
+  tooling:
+    foreground: foreground
+
+    continuous-integration:
+      foreground: khaki
+
+media:
+  foreground: orange
+
+office:
+  foreground: khaki
+
+archives:
+  foreground: red
+  font-style: underline
+
+executable:
+  foreground: brightgreen
+  font-style: bold
+
+unimportant:
+  foreground: dimgray
