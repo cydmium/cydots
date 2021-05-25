@@ -47,14 +47,28 @@ function +vi-git-st() {
     fi
 }
 
-
 # Configure git info
 zstyle ':vcs_info:git*' stagedstr " "
 zstyle ':vcs_info:git*' unstagedstr " "
 zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
-zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[green]%}%c%{$fg[red]%}%u%{$fg[yellow]%}%m%{ $fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
+zstyle ':vcs_info:git:*' formats "%{$fg[blue]%}(%{$fg[green]%}%c%{$fg[red]%}%u%{$fg[yellow]%}%m%{ $fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
 
 PROMPT="
-%B%{$fg[blue]%} %2~%{$reset_color%} %(?:%{$fg_bold[magenta]%}➜  :%{$fg_bold[red]%} ➜  )%{$fg[white]%}%b"
-RPROMPT="\$vcs_info_msg_0_ "
+%B%{$fg[cyan]%} %2~%{$reset_color%} %(?:%{$fg_bold[yellow]%}➜  :%{$fg_bold[red]%} ➜  )%{$fg[white]%}%b"
+
+function virtualenv_info {
+    [ $VIRTUAL_ENV ] && echo '%{$fg[blue]%}(%{$fg[white]%}'`basename $VIRTUAL_ENV`'%{$fg[blue]%})%{$fg[white]%}'
+}
+
+function updatePrompt {
+  if [[ $VIRTUAL_ENV != "" ]]; then
+    RPROMPT="$(virtualenv_info)\$vcs_info_msg_0_"
+  else
+    RPROMPT="\$vcs_info_msg_0_"
+  fi
+  export RPROMPT
+}
+
+precmd_functions+=(updatePrompt)
+export VIRTUAL_ENV_DISABLE_PROMPT=1
