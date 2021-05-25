@@ -18,3 +18,7 @@ alias :q='exit'
 # Default df and du to human readable
 alias df='df -h'
 alias du='du -h'
+
+# Ask before overwrite
+alias mv='mv -i'
+alias cp='cp -i'
