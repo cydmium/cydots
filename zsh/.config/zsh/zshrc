@@ -82,3 +82,6 @@ pyenv virtualenvwrapper_lazy
 
 # NPM
 export PATH="$HOME/.npm-global/bin:$PATH"
+
+# Luarocks
+export PATH="$HOME/.luarocks/bin:$PATH"
