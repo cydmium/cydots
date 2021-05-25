@@ -27,6 +27,7 @@ colors:
   khaki: "f0e68c"
   dimgray: "504945"
   brightgreen: "93bb26"
+  lightblue: 'cddfe6'
 
 core:
   regular_file: {}
@@ -39,7 +40,7 @@ core:
     font-style: bold
 
   symlink:
-    foreground: purple
+    foreground: lightblue
 
   broken_symlink:
     foreground: black
