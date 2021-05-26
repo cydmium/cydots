@@ -45,6 +45,9 @@ return require("packer").startup(function()
   use {"tamago324/lir.nvim", requires = {"nvim-lua/plenary.nvim"}} -- File Browser
   use "kyazdani42/nvim-web-devicons" -- devicons
 
+  -- Indentation Highlighting
+  use {"lukas-reineke/indent-blankline.nvim", branch = "lua", ft = "yaml"}
+
   -- Filetype specific plugins
   use {"lervag/vimtex", ft = "tex"}
 end)
