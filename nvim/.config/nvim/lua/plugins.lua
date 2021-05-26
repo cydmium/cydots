@@ -15,4 +15,7 @@ return require("packer").startup(function()
   use "sainnhe/gruvbox-material" -- lower contrast version of gruvbox
   use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}} -- replaces "morhetz/gruvbox"
   use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"} -- smart syntax highlighting
+
+  -- Parenentheses, brackets, etc.
+  use "windwp/nvim-autopairs" -- automatic (), [], "", etc.
 end)
