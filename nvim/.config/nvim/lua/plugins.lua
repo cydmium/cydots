@@ -44,4 +44,7 @@ return require("packer").startup(function()
   -- Better netrw
   use {"tamago324/lir.nvim", requires = {"nvim-lua/plenary.nvim"}} -- File Browser
   use "kyazdani42/nvim-web-devicons" -- devicons
+
+  -- Filetype specific plugins
+  use {"lervag/vimtex", ft = "tex"}
 end)
