@@ -19,6 +19,9 @@ return require("packer").startup(function()
   use "windwp/nvim-autopairs" -- automatic (), [], "", etc.
   use "p00f/nvim-ts-rainbow" -- rainbow parentheses
 
+  -- Git integration
   use "tpope/vim-fugitive" -- git command integration
   use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}} -- show git changes in sign col
+
+  use "terrortylor/nvim-comment" -- gcc to comment
 end)
