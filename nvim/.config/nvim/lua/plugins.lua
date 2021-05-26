@@ -34,5 +34,10 @@ return require("packer").startup(function()
   use "tpope/vim-fugitive" -- git command integration
   use {"lewis6991/gitsigns.nvim", requires = {"nvim-lua/plenary.nvim"}} -- show git changes in sign col
 
+  -- Comments
   use "terrortylor/nvim-comment" -- gcc to comment
+
+  -- Fuzzy Finding
+  use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}} -- Finder
+  use "nvim-telescope/telescope-fzy-native.nvim" -- Fuzzy finding
 end)
