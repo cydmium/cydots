@@ -12,5 +12,6 @@ require("comment-lua")
 require("lspinstall-lua")
 require("lspsaga-lua")
 require("lsp_signature-lua")
+require("compe-lua")
 
 require("lsp")

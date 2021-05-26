@@ -16,6 +16,11 @@ return require("packer").startup(function()
   use "ray-x/lsp_signature.nvim"
   use "kabouzeid/nvim-lspinstall"
 
+  -- Autocompletion and Snippets
+  use "hrsh7th/nvim-compe" -- autocompletion
+  use "hrsh7th/vim-vsnip" -- snippet engine
+  use "rafamadriz/friendly-snippets" -- default snippets
+
   -- Colorscheme
   use "sainnhe/gruvbox-material" -- lower contrast version of gruvbox
   use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}} -- replaces "morhetz/gruvbox"
