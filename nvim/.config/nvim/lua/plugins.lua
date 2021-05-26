@@ -5,8 +5,8 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
                          install_path)
 end
 
-vim.cmd [[packadd packer.nvim]]
-vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
+vim.cmd("packadd packer.nvim")
+vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- Auto compile when there are changes in plugins.lua
 
 return require("packer").startup(function()
   use "wbthomason/packer.nvim" -- packer manages itself
@@ -18,4 +18,5 @@ return require("packer").startup(function()
 
   -- Parenentheses, brackets, etc.
   use "windwp/nvim-autopairs" -- automatic (), [], "", etc.
+  use "p00f/nvim-ts-rainbow" -- rainbow parentheses
 end)
