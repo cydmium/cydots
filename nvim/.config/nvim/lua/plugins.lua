@@ -40,4 +40,8 @@ return require("packer").startup(function()
   -- Fuzzy Finding
   use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}}} -- Finder
   use "nvim-telescope/telescope-fzy-native.nvim" -- Fuzzy finding
+
+  -- Better netrw
+  use {"tamago324/lir.nvim", requires = {"nvim-lua/plenary.nvim"}} -- File Browser
+  use "kyazdani42/nvim-web-devicons" -- devicons
 end)
