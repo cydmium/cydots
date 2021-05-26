@@ -9,3 +9,8 @@ require("autopairs-lua")
 require("rainbow_parentheses-lua")
 require("gitsigns-lua")
 require("comment-lua")
+require("lspinstall-lua")
+require("lspsaga-lua")
+require("lsp_signature-lua")
+
+require("lsp")

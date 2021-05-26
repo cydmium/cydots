@@ -10,6 +10,12 @@ vim.cmd("autocmd BufWritePost plugins.lua PackerCompile") -- Auto compile when t
 return require("packer").startup(function()
   use "wbthomason/packer.nvim" -- packer manages itself
 
+  -- LSP Helpers
+  use "neovim/nvim-lspconfig"
+  use "glepnir/lspsaga.nvim"
+  use "ray-x/lsp_signature.nvim"
+  use "kabouzeid/nvim-lspinstall"
+
   -- Colorscheme
   use "sainnhe/gruvbox-material" -- lower contrast version of gruvbox
   use {"npxbr/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}} -- replaces "morhetz/gruvbox"
