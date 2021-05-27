@@ -49,5 +49,6 @@ return require("packer").startup(function()
   use {"lukas-reineke/indent-blankline.nvim", branch = "lua", ft = "yaml"}
 
   -- Filetype specific plugins
-  use {"lervag/vimtex", ft = "tex"}
+  -- use {"lervag/vimtex", ft = "tex"} -- can't use filetype loading b/c it breaks conceal, not sure why
+  use "lervag/vimtex"
 end)
