@@ -1,5 +1,5 @@
 setlocal spell
-inoremap <c-l> <c-g>U<esc>[s1z=``<c-g>a
+inoremap <C-l> <c-g>u<Esc>[s1z=``a<c-g>u
 setlocal shiftwidth=4
 setlocal softtabstop=4
 setlocal expandtab
