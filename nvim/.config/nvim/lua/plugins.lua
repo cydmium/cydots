@@ -46,9 +46,12 @@ return require("packer").startup(function()
   use "kyazdani42/nvim-web-devicons" -- devicons
 
   -- Indentation Highlighting
-  use {"lukas-reineke/indent-blankline.nvim", branch = "lua", ft = "yaml"}
+  -- use {"lukas-reineke/indent-blankline.nvim", branch = "lua", ft = "yaml"}
 
   -- Filetype specific plugins
   -- use {"lervag/vimtex", ft = "tex"} -- can't use filetype loading b/c it breaks conceal, not sure why
   use "lervag/vimtex"
+
+  -- Games
+  use "ThePrimeagen/vim-be-good"
 end)
