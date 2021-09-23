@@ -1,19 +1,4 @@
 #!/bin/sh
-if command -v nvim > /dev/null 2>&1; then
-	export EDITOR="nvim"
-	export MANPAGER="nvim +Man!"
-	export VIMRC=~/.config/nvim/init.vim
-	export VIMCONF=~/.config/nvim
-elif command -v vim > /dev/null 2>&1; then
-	export EDITOR="vim"
-	export VIMRC=~/.vimrc
-	export VIMCONF=~/.vim
-else
-	export EDITOR="vi"
-	export VIMRC=~/.vimrc
-	export VIMCONF=~/.vim
-fi
-
 export BROWSER="firefox"
 export READER="zathura"
 export TERMINAL="alacritty"
@@ -33,3 +18,22 @@ export WORKON_HOME=~/.ve
 export PROJECT_HOME=~/projects
 eval "$(pyenv init --path)"
 . "$HOME/.cargo/env"
+
+if command -v nvim > /dev/null 2>&1; then
+	export EDITOR="nvim"
+	export MANPAGER="nvim +Man!"
+	export VIMRC=~/.config/nvim/init.vim
+	export VIMCONF=~/.config/nvim
+elif command -v vim > /dev/null 2>&1; then
+	export EDITOR="vim"
+	export VIMRC=~/.vimrc
+	export VIMCONF=~/.vim
+else
+	export EDITOR="vi"
+	export VIMRC=~/.vimrc
+	export VIMCONF=~/.vim
+fi
+
+if [[ "$(tty)" = "/dev/tty1" ]]; then
+	pgrep i3 || startx
+fi
