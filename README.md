@@ -19,3 +19,6 @@ stow nvim
 
 ## Package Requirements
 The neovim config relies on the 0.5 or nightly release, so ensure your neovim version (`nvim --version`) is greater than 0.5.
+
+## Other Packages
+I am using the Iosevka Nerd Font available at: https://www.nerdfonts.com/font-downloads
