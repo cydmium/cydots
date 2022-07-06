@@ -107,14 +107,39 @@ local docstring = function(args)
   }))
 end
 
+local init_body = function(args)
+  local arg_list = args[1][1]
+  local docstring = args[2][1]
+  -- Remove any occurances of self from list
+  arg_list = arg_list:gsub("self,", "")
+
+  local nodes = {}
+  local insert_index = 1
+  for str in string.gmatch(arg_list, "([^" .. "," .. "]+)") do
+    -- Remove all spaces from argument
+    str = str:gsub("%s+", "")
+    -- Remove type hints
+    str = str:gsub("(.*):.*$", "%1")
+    if docstring == "" and insert_index == 1 then
+      table.insert(nodes, t("self."))
+    else
+      table.insert(nodes, t({"", "\t\tself."}))
+    end
+    table.insert(nodes, i(insert_index, str))
+    table.insert(nodes, t(" = " .. str))
+  end
+  return sn(nil, nodes)
+end
+
 local auto = {}
 
 local standard = {}
 table.insert(standard, s("d", fmt([[
           def {func}({args}){ret}:
-          {doc}{body}
+          {doc}
+          {body}
         ]], {
-  func = i(1, "function_name"),
+  func = i(1, "my_function"),
   args = ct(2, {
     r(1, "arguments", i(nil, "arg1")),
     sn(nil, {t("self, "), r(1, "arguments", i(nil, "arg1"))})
@@ -123,4 +148,74 @@ table.insert(standard, s("d", fmt([[
   doc = d(4, docstring, {2, 3}),
   body = i(0)
 })))
+
+table.insert(standard, s("cl", fmt([[
+class {class}({object}):
+    {doc}
+    def __init__(self, {args}):
+        {init_doc}{body}
+]], {
+  class = i(1, "MyClass"),
+  object = i(2, "object"),
+  doc = ct(3, {sn(nil, {t([[""" ]]), i(1), t([[ """]])}), t("")},
+           {texts = {"(Docstring)", "(No Docstring)"}}),
+  args = i(4, "arg1"),
+  init_doc = ct(5, {sn(nil, {t([[""" ]]), i(1), t([[ """]])}), t("")},
+                {texts = {"(Docstring)", "(No Docstring)"}}),
+  body = d(6, init_body, {4, 5})
+})))
+
+table.insert(standard, s("env", t {"#!/usr/bin/env python", ""}))
+
+table.insert(standard, s("ifmain", fmt([[
+if __name__ == "__main__":
+    {}
+]], i(1, "pass"))))
+
+table.insert(standard, s("with", fmt([[
+with {} as {}:
+    {}
+]], {i(1, "expr"), i(2, "var"), i(3, "pass")})))
+
+table.insert(standard, s("for", fmt([[
+for {} in {}:
+    {}
+]], {i(1, "item"), i(2, "iterable"), i(3, "pass")})))
+
+table.insert(standard, s("from", fmt([[
+from {} import {}
+]], {i(1, "module"), i(2, "stuff")})))
+
+table.insert(standard, s("if", fmt([[
+if {}:
+    {}
+]], {i(1, "condition"), i(2, "pass")})))
+
+table.insert(standard, s("ife", fmt([[
+if {}:
+    {}
+else:
+    {}
+]], {i(1, "condition"), i(2, "pass"), i(3, "pass")})))
+
+table.insert(standard, s("ifee", fmt([[
+if {}:
+    {}
+elif {}:
+    {}
+else:
+    {}
+]], {i(1, "condition"), i(2, "pass"), i(3, "condition"), i(4, "pass"), i(5, "pass")})))
+
+table.insert(standard, s("try", fmt([[
+try:
+    {}
+except {}:
+    {}
+]], {i(1, "pass"), i(2, "Exception"), i(3, "pass")}))) -- TODO: Make Exception handling a choice node for exception as e
+
+table.insert(standard, s("lc", fmt([[
+[{} for {} in {}]{}
+]], {i(1), i(2, "item"), i(3, "iterable"), i(0)})))
+
 return standard
