@@ -1,6 +1,6 @@
 local ls = require("luasnip")
 ls.config.set_config {
-  history = true,
+  history = false,
   enable_autosnippets = true,
   snip_env = {
     s = require("luasnip.nodes.snippet").S,

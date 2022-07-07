@@ -107,6 +107,18 @@ local docstring = function(args)
   }))
 end
 
+local func_body = function(args)
+  local docstring = args[1][1]
+  local nodes = {}
+  if docstring == "" then
+    table.insert(nodes, t("\t"))
+  else
+    table.insert(nodes, t({"", "\t"}))
+  end
+  table.insert(nodes, i(1, "pass"))
+  return sn(nil, nodes)
+end
+
 local init_body = function(args)
   local arg_list = args[1][1]
   local docstring = args[2][1]
@@ -126,6 +138,7 @@ local init_body = function(args)
       table.insert(nodes, t({"", "\t\tself."}))
     end
     table.insert(nodes, i(insert_index, str))
+    insert_index = insert_index + 1
     table.insert(nodes, t(" = " .. str))
   end
   return sn(nil, nodes)
@@ -136,28 +149,27 @@ local auto = {}
 local standard = {}
 table.insert(standard, s("d", fmt([[
           def {func}({args}){ret}:
-          {doc}
-          {body}
+          {doc}{body}
         ]], {
   func = i(1, "my_function"),
   args = ct(2, {
     r(1, "arguments", i(nil, "arg1")),
     sn(nil, {t("self, "), r(1, "arguments", i(nil, "arg1"))})
   }, {texts = {"(function)", "(method)"}}),
-  ret = c(3, {t(""), sn(nil, {t(" -> "), i(1)})}),
+  ret = ct(3, {t(""), sn(nil, {t(" -> "), i(1)})},
+           {texts = {"(no return type)", "(return type)"}}),
   doc = d(4, docstring, {2, 3}),
-  body = i(0)
+  body = d(5, func_body, {4})
 })))
 
 table.insert(standard, s("cl", fmt([[
 class {class}({object}):
-    {doc}
-    def __init__(self, {args}):
+    {doc}def __init__(self, {args}):
         {init_doc}{body}
 ]], {
   class = i(1, "MyClass"),
   object = i(2, "object"),
-  doc = ct(3, {sn(nil, {t([[""" ]]), i(1), t([[ """]])}), t("")},
+  doc = ct(3, {sn(nil, {t([[""" ]]), i(1), t({[[ """]], "\t"})}), t("")},
            {texts = {"(Docstring)", "(No Docstring)"}}),
   args = i(4, "arg1"),
   init_doc = ct(5, {sn(nil, {t([[""" ]]), i(1), t([[ """]])}), t("")},

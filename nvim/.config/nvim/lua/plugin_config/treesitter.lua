@@ -4,5 +4,6 @@ require"nvim-treesitter.configs".setup {
   indent = {enable = true, disable = {"python"}},
   autopairs = {enable = true},
   endwise = {enable = true},
-  playground = {enable = true}
+  playground = {enable = true},
+  rainbow = {enable = true, extended_mode = true, max_file_lines = nil}
 }

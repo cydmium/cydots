@@ -1,10 +1,23 @@
 local tex = {}
 tex.in_mathzone = function()
+  print("Function called")
   return vim.fn["vimtex#syntax#in_mathzone"]() == 1
 end
 
 tex.in_text = function()
   return not tex.in_mathzone()
+end
+
+local at_beginning_of_line = function(line_to_cursor, trigger)
+  -- Remove all whitespace
+  line_to_cursor = line_to_cursor:gsub("%s+", "")
+  -- Remove trigger
+  line_to_cursor = line_to_cursor:sub(1, -(#trigger + 1))
+  -- Check if there's anything left, i.e not first thing on the line
+  if line_to_cursor == "" then
+    return true
+  end
+  return false
 end
 
 local create_list = function(args, snip)
@@ -61,6 +74,23 @@ local tab = function(args, snip)
   return sn(nil, nodes)
 end
 
+local to_deg = function(args, snip)
+  local nodes = {}
+  table.insert(nodes, t(snip.captures[1] .. "^{"))
+  table.insert(nodes, i(1))
+  table.insert(nodes, t("}"))
+  return sn(nil, nodes)
+end
+
+local frac_node = function(args, snip)
+  local nodes = {}
+  local str = table.concat(snip.captures)
+  table.insert(nodes, t("\\frac{" .. str .. "}{"))
+  table.insert(nodes, i(1))
+  table.insert(nodes, t("}"))
+  return sn(nil, nodes)
+end
+
 local standard = {}
 local auto = {}
 
@@ -80,6 +110,7 @@ table.insert(standard, s("ls", fmt([[
     }
   })
 })))
+
 table.insert(standard, s("tab", fmt([[
 \begin{{tabular}}{{{}}}
 {}
@@ -103,8 +134,37 @@ table.insert(standard, s("tab", fmt([[
   })
 })))
 
+table.insert(standard, s("beg", fmt([[
+\begin{{{}}}
+    {}
+\end{{{}}}
+]], {i(1), i(0), rep(1)}), {condition = at_beginning_of_line}))
+
 table.insert(auto, s("dm", {t({"\\[", "\t"}), i(1), t({"", "\\]"})},
                      {condition = tex.in_text}))
+
 table.insert(auto, s("mk", fmt("${}$", i(1)), {condition = tex.in_text}))
+
+table.insert(auto, s({trig = "([A-Za-z])(%d)", regTrig = true}, f(function(args, snip)
+  return snip.captures[1] .. "_" .. snip.captures[2]
+end, {}), {condition = tex.in_mathzone}))
+
+table.insert(auto,
+             s({trig = "([A-Za-z])_(%d)(%d)", regTrig = true}, f(function(args, snip)
+  return snip.captures[1] .. "_{" .. snip.captures[2] .. snip.captures[3] .. "}"
+end, {}), {condition = tex.in_mathzone}))
+
+table.insert(auto, s({trig = "([A-Za-z%d])td", regTrig = true}, d(1, to_deg, {}),
+                     {condition = tex.in_mathzone}))
+
+table.insert(auto, s({trig = "(%d+)/", regTrig = true}, d(1, frac_node, {}),
+                     {condition = tex.in_mathzone}))
+
+table.insert(auto,
+             s({trig = "(%d+)([A-Za-z\\]+)/", regTrig = true}, d(1, frac_node, {}),
+               {condition = tex.in_mathzone}))
+
+-- TODO: Implement hat, bar, dot, vec auto fixes
+-- TODO: Implement misc snippets for lim, sum, etc.
 
 return standard, auto

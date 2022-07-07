@@ -3,7 +3,9 @@ local builtins = nls.builtins
 
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
-    filter = function(client) return client.name == "null-ls" end,
+    filter = function(client)
+      return client.name == "null-ls"
+    end,
     bufnr = bufnr
   })
 end
@@ -26,7 +28,9 @@ nls.setup {
   end,
   sources = {
     builtins.code_actions.refactoring,
-    builtins.diagnostics.flake8,
+    builtins.diagnostics.flake8.with({
+      extra_args = {"--extend-ignore=E203", "--max-line-length=88"}
+    }),
     builtins.formatting.black.with({args = {"--quiet", "-"}}),
     builtins.formatting.isort,
     builtins.diagnostics.luacheck,

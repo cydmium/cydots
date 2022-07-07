@@ -50,15 +50,14 @@ local on_attach = function(client, bufnr)
         i = {vim.lsp.buf.implementation, "Goto Implementation"},
         r = {vim.lsp.buf.references, "Goto References"}
       },
-      K = {vim.lsp.buf.hover, "Hover"},
-      ["<c-k>"] = {vim.lsp.buf.signature_help, "Signature Popup"},
       ["<leader>"] = {
         ["wa"] = {vim.lsp.buf.add_workspace_folder, "Add workspace folder"},
         ["wr"] = {vim.lsp.buf.remove_workspace_folder, "Remove workspace folder"},
+        k = {vim.lsp.buf.hover, "Hover"},
         D = {vim.lsp.buf.type_definition, "Goto Type Definition"},
         ["rn"] = {vim.lsp.buf.rename, "Rename"},
         ["ca"] = {vim.lsp.buf.code_action, "Code Action"},
-        f = {vim.lsp.buf.formatting, "Format"}
+        f = {vim.lsp.buf.format, "Format"}
       }
     })
   else

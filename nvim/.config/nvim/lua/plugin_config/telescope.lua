@@ -1,20 +1,11 @@
 local actions = require("telescope.actions")
 
-vim.keymap.set("n", "<leader>ff",
-               "<cmd>lua require(\"telescope.builtin\").find_files()<cr>")
-vim.keymap.set("n", "<leader>lg",
-               "<cmd>lua require(\"telescope.builtin\").live_grep()<cr>")
-vim.keymap.set("n", "<leader>b",
-               "<cmd>lua require(\"telescope.builtin\").buffers()<cr>")
-vim.keymap.set("n", "<leader>fh",
-               "<cmd>lua require(\"telescope.builtin\").help_tags()<cr>")
-vim.keymap.set("n", "<leader>fg",
-               "<cmd>lua require(\"telescope.builtin\").git_files()<cr>")
-
 require("telescope").setup {
   defaults = {
     mappings = {
       i = { -- Insert mode mappings
+        ["<c-n>"] = actions.move_selection_next,
+        ["<c-p>"] = actions.move_selection_previous,
         ["<c-j>"] = actions.move_selection_next,
         ["<c-k>"] = actions.move_selection_previous,
         ["<esc>"] = actions.close,
@@ -39,4 +30,31 @@ require("telescope").setup {
 }
 
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("notify")
+
+if packer_plugins["which-key.nvim"] and packer_plugins["which-key.nvim"].loaded then
+  wk = require("which-key")
+  wk.register({
+    ["<leader>"] = {
+      f = {
+        f = {require("telescope.builtin").find_files, "Find Files"},
+        h = {require("telescope.builtin").help_tags, "Find Help"},
+        g = {require("telescope.builtin").git_files, "Find Git File"},
+        c = {require("telescope.builtin").commands, "Find Commands"},
+        d = {require("telescope.builtin").diagnostics, "Find Diagnostics"}
+      },
+      l = {g = {require("telescope.builtin").live_grep, "Live Grep"}},
+      b = {require("telescope.builtin").buffers, "Open Buffer"}
+    }
+  })
+else
+  vim.keymap.set("n", "<leader>ff",
+                 "<cmd>lua require(\"telescope.builtin\").find_files()<cr>")
+  vim.keymap.set("n", "<leader>lg",
+                 "<cmd>lua require(\"telescope.builtin\").live_grep()<cr>")
+  vim.keymap.set("n", "<leader>b",
+                 "<cmd>lua require(\"telescope.builtin\").buffers()<cr>")
+  vim.keymap.set("n", "<leader>fh",
+                 "<cmd>lua require(\"telescope.builtin\").help_tags()<cr>")
+  vim.keymap.set("n", "<leader>fg",
+                 "<cmd>lua require(\"telescope.builtin\").git_files()<cr>")
+end

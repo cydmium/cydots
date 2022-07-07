@@ -44,14 +44,21 @@ return require("packer").startup(function()
     config = function()
       require("plugin_config.treesitter")
     end,
-    requires = {"RRethy/nvim-treesitter-endwise"}
+    requires = {"RRethy/nvim-treesitter-endwise", "p00f/nvim-ts-rainbow"}
   } -- smart syntax highlighting
 
   use {"nvim-treesitter/playground", requires = {"nvim-treesitter/nvim-treesitter"}}
 
   -- Colorscheme
+  use {"ellisonleao/gruvbox.nvim"}
+  use {"sainnhe/gruvbox-material"}
+  use {"Th3Whit3Wolf/one-nvim"}
+  use {"sainnhe/everforest"}
+  use {"dracula/vim"}
+  use {"rose-pine/neovim", as = "rose-pine"}
+  use {"catppuccin/nvim", as = "catppuccin"}
   use {
-    "luisiacc/gruvbox-baby",
+    "navarasu/onedark.nvim",
     config = function()
       require("colorscheme")
     end
@@ -82,13 +89,6 @@ return require("packer").startup(function()
   use {
     "nvim-telescope/telescope.nvim",
     requires = {{"nvim-lua/plenary.nvim"}},
-    keys = {
-      {"n", "<leader>ff"},
-      {"n", "<leader>b"},
-      {"n", "<leader>fg"},
-      {"n", "<leader>fh"}
-    },
-    cmd = {"Telescope"},
     config = function()
       require("plugin_config.telescope")
     end
@@ -209,7 +209,7 @@ return require("packer").startup(function()
     requires = {"williamboman/nvim-lsp-installer"}
   }
 
-  -- Null-LS: Hook non-language server features into LSP protocoll
+  -- Null-LS: Hook non-language server features into LSP protocol
   use {
     "jose-elias-alvarez/null-ls.nvim",
     event = "BufWinEnter",
