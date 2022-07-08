@@ -19,10 +19,11 @@ cmp.setup({
     -- completion = cmp.config.window.bordered(),
     -- documentation = cmp.config.window.bordered(),
   },
+
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    [",."] = cmp.mapping.close(),
+    ["<c-x>"] = cmp.mapping.close(),
     ["<c-y>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true
@@ -83,5 +84,6 @@ cmp.setup.cmdline("/", {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({{name = "path"}}, {{name = "cmdline"}})
+  sources = cmp.config.sources({{name = "path"}},
+                               {{name = "cmdline", keyword_pattern = [[^\@!(%d)\s]]}})
 })
