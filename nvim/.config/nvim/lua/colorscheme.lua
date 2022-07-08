@@ -14,17 +14,17 @@ if packer_plugins["onedark.nvim"] then
 end
 if packer_plugins["everforest"] then
   vim.g.everforest_better_performance = true
-  vim.g.everforest_background = "medium" -- soft, medium, hard
+  vim.g.everforest_background = "hard" -- soft, medium, hard
 end
 if packer_plugins["gruvbox-material"] then
   vim.g.gruvbox_material_better_performance = true
-  vim.g.gruvbox_material_background = "medium" -- soft, medium, hard
+  vim.g.gruvbox_material_background = "soft" -- soft, medium, hard
   vim.g.gruvbox_material_foreground = "material" -- material, mix, original
 end
 if packer_plugins["rose-pine"] then
   require("rose-pine").setup({dark_variant = "moon"})
 end
 if packer_plugins["catppuccin"] then
-  vim.g.catppuccin_flavour = "frappe"
+  vim.g.catppuccin_flavour = "macchiato"
 end
 vim.cmd("colorscheme everforest")

@@ -115,7 +115,7 @@ local func_body = function(args)
   else
     table.insert(nodes, t({"", "\t"}))
   end
-  table.insert(nodes, i(1, "pass"))
+  table.insert(nodes, r(1, "function_definition", i(nil, "pass")))
   return sn(nil, nodes)
 end
 
@@ -147,6 +147,7 @@ end
 local auto = {}
 
 local standard = {}
+-- Function/method definition
 table.insert(standard, s("d", fmt([[
           def {func}({args}){ret}:
           {doc}{body}
@@ -162,6 +163,7 @@ table.insert(standard, s("d", fmt([[
   body = d(5, func_body, {4})
 })))
 
+-- Class definition
 table.insert(standard, s("cl", fmt([[
 class {class}({object}):
     {doc}def __init__(self, {args}):
@@ -177,27 +179,36 @@ class {class}({object}):
   body = d(6, init_body, {4, 5})
 })))
 
+-- Environment
 table.insert(standard, s("env", t {"#!/usr/bin/env python", ""}))
 
+-- if __name__ == "__main__"
 table.insert(standard, s("ifmain", fmt([[
 if __name__ == "__main__":
     {}
 ]], i(1, "pass"))))
 
+-- With statement
 table.insert(standard, s("with", fmt([[
 with {} as {}:
     {}
 ]], {i(1, "expr"), i(2, "var"), i(3, "pass")})))
 
+-- For loop
 table.insert(standard, s("for", fmt([[
 for {} in {}:
     {}
 ]], {i(1, "item"), i(2, "iterable"), i(3, "pass")})))
 
+-- from x import y
 table.insert(standard, s("from", fmt([[
 from {} import {}
 ]], {i(1, "module"), i(2, "stuff")})))
 
+-- Import
+table.insert(standard, s("imp", fmt([[import {}]], i(1, "module"))))
+
+-- If statements
 table.insert(standard, s("if", fmt([[
 if {}:
     {}
@@ -219,6 +230,7 @@ else:
     {}
 ]], {i(1, "condition"), i(2, "pass"), i(3, "condition"), i(4, "pass"), i(5, "pass")})))
 
+-- Try Except
 table.insert(standard, s("try", fmt([[
 try:
     {}
@@ -226,8 +238,15 @@ except {}:
     {}
 ]], {i(1, "pass"), i(2, "Exception"), i(3, "pass")}))) -- TODO: Make Exception handling a choice node for exception as e
 
+-- List comprehension
 table.insert(standard, s("lc", fmt([[
 [{} for {} in {}]{}
 ]], {i(1), i(2, "item"), i(3, "iterable"), i(0)})))
+
+-- Common imports
+table.insert(standard, s("pyplot", t("import matplotlib.pyplot as plt")))
+table.insert(standard, s("numpy", t("import numpy as np")))
+table.insert(standard, s("xarray", t("import xarray as xr")))
+table.insert(standard, s("pandas", t("import pandas as pd")))
 
 return standard

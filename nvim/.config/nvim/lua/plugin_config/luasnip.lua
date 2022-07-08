@@ -1,6 +1,6 @@
 local ls = require("luasnip")
 ls.config.set_config {
-  history = false,
+  history = true,
   enable_autosnippets = true,
   snip_env = {
     s = require("luasnip.nodes.snippet").S,
@@ -26,7 +26,8 @@ ls.config.set_config {
     parse = require("luasnip.util.parser").parse_snippet,
     ai = require("luasnip.nodes.absolute_indexer")
   },
-  updateevents = "TextChanged,TextChangedI"
+  updateevents = "TextChanged,TextChangedI",
+  delete_check_events = "TextChanged,TextChangedI"
 }
 -- require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").load({paths = "./snippets"})
