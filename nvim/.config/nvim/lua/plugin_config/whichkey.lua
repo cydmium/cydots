@@ -35,8 +35,8 @@ wk.setup {
     group = "+" -- symbol prepended to a group
   },
   popup_mappings = {
-    scroll_down = '<c-d>', -- binding to scroll down inside the popup
-    scroll_up = '<c-u>' -- binding to scroll up inside the popup
+    scroll_down = "<c-d>", -- binding to scroll down inside the popup
+    scroll_up = "<c-u>" -- binding to scroll up inside the popup
   },
   window = {
     border = "none", -- none, single, double, shadow
@@ -81,10 +81,10 @@ vim.keymap.set("n", "j",
 vim.keymap.set("n", "k",
                "v:count ? (v:count > 5 ? \"m'\" . v:count : \"\") . \"k\" : \"gk\"",
                {expr = true, noremap = true, silent = true})
-vim.keymap.set("v", "j",
+vim.keymap.set("x", "j",
                "v:count ? (v:count > 5 ? \"m'\" . v:count : \"\") . \"j\" : \"gj\"",
                {expr = true, noremap = true, silent = true})
-vim.keymap.set("v", "k",
+vim.keymap.set("x", "k",
                "v:count ? (v:count > 5 ? \"m'\" . v:count : \"\") . \"k\" : \"gk\"",
                {expr = true, noremap = true, silent = true})
 

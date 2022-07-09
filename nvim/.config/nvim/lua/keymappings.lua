@@ -13,10 +13,10 @@ vim.keymap.set("n", "j",
 vim.keymap.set("n", "k",
                "v:count ? (v:count > 5 ? \"m'\" . v:count : \"\") . \"k\" : \"gk\"",
                {expr = true, noremap = true, silent = true})
-vim.keymap.set("v", "j",
+vim.keymap.set("x", "j",
                "v:count ? (v:count > 5 ? \"m'\" . v:count : \"\") . \"j\" : \"gj\"",
                {expr = true, noremap = true, silent = true})
-vim.keymap.set("v", "k",
+vim.keymap.set("x", "k",
                "v:count ? (v:count > 5 ? \"m'\" . v:count : \"\") . \"k\" : \"gk\"",
                {expr = true, noremap = true, silent = true})
 
