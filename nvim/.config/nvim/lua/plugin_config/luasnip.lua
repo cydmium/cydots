@@ -141,14 +141,25 @@ vim.keymap.set({"i", "s"}, "<c-h>", function()
     _G.dynamic_node_external_update(2)
   end
 end)
---
--- vim.keymap.set({"n", "i"}, "<c-q>", function()
---   local curr_status, curr_node = pcall(require"nvim-treesitter.ts_utils".get_node_at_cursor)
---   if curr_status then
---     local parent_status, parent_node = pcall(curr_node:parent)
---     if parent_status then
---       return parent_node:type() == "class_definition"
---     end
---   end
---   return false
--- end)
+
+leave_snippet = function()
+  local active_node = ls.session.current_nodes[api.nvim_get_current_buf()]
+  if ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or
+      vim.v.event.old_mode == "i") and active_node and not ls.session.jump_active then
+    while active_node do
+      if active_node.virt_text_id then
+        api.nvim_buf_del_extmark(0, ls.session.ns_id, active_node.virt_text_id)
+        -- break
+      end
+      active_node = active_node.parent
+    end
+    ls.unlink_current()
+  end
+end
+
+local snippet_augroup = api.nvim_create_augroup("snippets", {clear = true})
+api.nvim_create_autocmd({"ModeChanged"}, {
+  pattern = {"*"},
+  command = "lua leave_snippet()",
+  group = snippet_augroup
+})

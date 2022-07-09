@@ -154,7 +154,7 @@ table.insert(standard, s("d", fmt([[
         ]], {
   func = i(1, "my_function"),
   args = ct(2, {
-    r(1, "arguments", i(nil, "arg1")),
+    sn(nil, {r(1, "arguments", i(nil, "arg1"))}),
     sn(nil, {t("self, "), r(1, "arguments", i(nil, "arg1"))})
   }, {texts = {"(function)", "(method)"}}),
   ret = ct(3, {t(""), sn(nil, {t(" -> "), i(1)})},
