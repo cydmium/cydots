@@ -60,6 +60,7 @@ local tab = function(args, snip)
   local ins_indx = 1
   for j = 1, snip.rows do
     -- use restoreNode to not lose content when updating.
+    table.insert(nodes, t("\t"))
     table.insert(nodes, r(ins_indx, tostring(j) .. "x1", i(1)))
     ins_indx = ins_indx + 1
     for k = 2, cols do
@@ -94,6 +95,7 @@ end
 local standard = {}
 local auto = {}
 
+-- Infinite list (itemize)
 table.insert(standard, s("ls", fmt([[
 \begin{{itemize}}
 {}
@@ -109,15 +111,41 @@ table.insert(standard, s("ls", fmt([[
       end
     }
   })
-})))
+}), {condition = at_beginning_of_line}))
+
+-- Infinite list (enumerate)
+table.insert(standard, s("enum", fmt([[
+\begin{{enumerate}}
+{}
+\end{{enumerate}}
+]], {
+  d(1, create_list, {}, {
+    user_args = {
+      function(snip)
+        snip.rows = snip.rows + 1
+      end,
+      function(snip)
+        snip.rows = math.max(snip.rows - 1, 1)
+      end
+    }
+  })
+}), {condition = at_beginning_of_line}))
 
 table.insert(standard, s("tab", fmt([[
-\begin{{tabular}}{{{}}}
-{}
-\end{{tabular}}
+\begin{{table}}[{loc}]
+    \centering
+    \caption{{{caption}}}
+    \label{{tab:{label}}}
+    \begin{{tabular}}{{{columns}}}
+{table}
+    \end{{tabular}}
+\end{{table}}
 ]], {
-  i(1, "c"),
-  d(2, tab, {1}, {
+  loc = i(1, "htpb"),
+  caption = i(2, "Caption"),
+  label = i(3, "Label"),
+  columns = i(4, "c"),
+  table = d(5, tab, {4}, {
     user_args = {
       -- Pass the functions used to manually update the dynamicNode as user args.
       -- The n-th of these functions will be called by dynamic_node_external_update(n).
@@ -132,19 +160,31 @@ table.insert(standard, s("tab", fmt([[
       end
     }
   })
-})))
+}), {condition = at_beginning_of_line}))
 
+-- TODO: Add figure environment
+
+-- begin statement
 table.insert(standard, s("beg", fmt([[
 \begin{{{}}}
     {}
 \end{{{}}}
 ]], {i(1), i(0), rep(1)}), {condition = at_beginning_of_line}))
 
+-- Partial derivative
+table.insert(standard,
+             s("part", fmt([[\frac{{\partial {}}}{{\partial {}}}]], {i(1), i(2)}),
+               {condition = tex.in_mathzone}))
+
+-- Auto Snippets
+-- Display Math
 table.insert(auto, s("dm", {t({"\\[", "\t"}), i(1), t({"", "\\]"})},
                      {condition = tex.in_text}))
 
+-- Inline Math
 table.insert(auto, s("mk", fmt("${}$", i(1)), {condition = tex.in_text}))
 
+-- Auto subscript
 table.insert(auto, s({trig = "([A-Za-z])(%d)", regTrig = true}, f(function(args, snip)
   return snip.captures[1] .. "_" .. snip.captures[2]
 end, {}), {condition = tex.in_mathzone}))
@@ -154,9 +194,15 @@ table.insert(auto,
   return snip.captures[1] .. "_{" .. snip.captures[2] .. snip.captures[3] .. "}"
 end, {}), {condition = tex.in_mathzone}))
 
+-- Auto degree
 table.insert(auto, s({trig = "([A-Za-z%d])td", regTrig = true}, d(1, to_deg, {}),
                      {condition = tex.in_mathzone}))
 
+-- Auto sqrt
+table.insert(auto,
+             s("sqrt", fmt([[\sqrt{{{}}}]], {i(1)}), {condition = tex.in_mathzone}))
+
+-- Auto fraction
 table.insert(auto, s({trig = "(%d+)/", regTrig = true}, d(1, frac_node, {}),
                      {condition = tex.in_mathzone}))
 
@@ -164,7 +210,91 @@ table.insert(auto,
              s({trig = "(%d+)([A-Za-z\\]+)/", regTrig = true}, d(1, frac_node, {}),
                {condition = tex.in_mathzone}))
 
--- TODO: Implement hat, bar, dot, vec auto fixes
+table.insert(auto, s("//", fmt([[\frac{{{}}}{{{}}}]], {i(1), i(2)}),
+                     {condition = tex.in_mathzone}))
+
+-- Align equal
+table.insert(auto, s("==", fmt([[&= {}]], {i(1)}), {condition = tex.in_mathzone}))
+
+-- <=, >=, ->, ~
+table.insert(auto, s("<=", t("\\leq "), {condition = tex.in_mathzone}))
+table.insert(auto, s(">=", t("\\geq "), {condition = tex.in_mathzone}))
+table.insert(auto, s("->", t("\\to "), {condition = tex.in_mathzone}))
+table.insert(auto, s("~", t("\\sim "), {condition = tex.in_mathzone}))
+
+-- Math Caligraphy
+table.insert(auto,
+             s("mcal", fmt([[\mathcal{{{}}}]], {i(1)}), {condition = tex.in_mathzone}))
+
+-- Ceil and Floor
+table.insert(auto, s("ceil", fmt([[\left\lceil {} \right\rceil]], {i(1)}),
+                     {condition = tex.in_mathzone}))
+
+table.insert(auto, s("floor", fmt([[\left\lceil {} \right\rceil]], {i(1)}),
+                     {condition = tex.in_mathzone}))
+
+-- Matrices
+table.insert(auto, s("bmat", fmt([[
+\begin{{bmatrix}}
+    {}
+\end{{bmatrix}}
+]], {i(1)}), {condition = tex.in_mathzone}))
+
+table.insert(auto, s("vmat", fmt([[
+\begin{{vmatrix}}
+    {}
+\end{{vmatrix}}
+]], {i(1)}), {condition = tex.in_mathzone}))
+
+table.insert(auto, s("mat", fmt([[
+\begin{{{}}}
+    {}
+\end{{{}}}
+]], {
+  c(1,
+    {t("bmatrix"), t("pmatrix"), t("vmatrix"), t("Vmatrix"), t("Bmatrix"), t("matrix")}),
+  i(2),
+  rep(1)
+}), {condition = tex.in_mathzone}))
+
+-- ... = \dots
+table.insert(auto, s("...", t("\\dots"), {condition = tex.in_mathzone}))
+
+-- Inverse
+table.insert(auto, s("inv", t("^{{-1}}"), {condition = tex.in_mathzone}))
+table.insert(auto, s({trig = "([A-Za-z])inv", regTrig = true}, f(function(args, snip)
+  return snip.captures[1] .. "^{-1}"
+end, {}), {condition = tex.in_mathzone}))
+table.insert(auto, s({trig = "(%d)inv", regTrig = true}, f(function(args, snip)
+  return snip.captures[1] .. "^{-1}"
+end, {}), {condition = tex.in_mathzone}))
+
+-- Auto xhat = \hat{x}
+table.insert(auto, s({trig = "([A-Za-z])hat", regTrig = true}, f(function(args, snip)
+  return "\\hat{" .. snip.captures[1] .. "}"
+end, {}), {condition = tex.in_mathzone}))
+
+-- Auto xbar = \overline{x}
+table.insert(auto, s({trig = "([A-Za-z])bar", regTrig = true}, f(function(args, snip)
+  return "\\overline{" .. snip.captures[1] .. "}"
+end, {}), {condition = tex.in_mathzone}))
+
+-- Auto xdot = \dot{x}
+table.insert(auto, s({trig = "([A-Za-z])dot", regTrig = true}, f(function(args, snip)
+  return "\\dot{" .. snip.captures[1] .. "}"
+end, {}), {condition = tex.in_mathzone}))
+
+-- Auto x,. or x., or xvec = \vec{x}
+table.insert(auto, s({trig = "([A-Za-z]),.", regTrig = true}, f(function(args, snip)
+  return "\\vec{" .. snip.captures[1] .. "}"
+end, {}), {condition = tex.in_mathzone}))
+table.insert(auto, s({trig = "([A-Za-z]).,", regTrig = true}, f(function(args, snip)
+  return "\\vec{" .. snip.captures[1] .. "}"
+end, {}), {condition = tex.in_mathzone}))
+table.insert(auto, s({trig = "([A-Za-z])vec", regTrig = true}, f(function(args, snip)
+  return "\\vec{" .. snip.captures[1] .. "}"
+end, {}), {condition = tex.in_mathzone}))
+
 -- TODO: Implement misc snippets for lim, sum, etc.
 
 return standard, auto
