@@ -470,6 +470,8 @@ shell:
 key_bindings:
   - { key: V, mods: Control|Shift, action: Paste}
   - { key: C, mods: Control|Shift, action: Copy}
+  - { key: Equals, mods: control, action: IncreaseFontSize}
+  - { key: Minus, mods: control, action: DecreaseFontSize}
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }

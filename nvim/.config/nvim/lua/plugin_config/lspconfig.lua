@@ -59,9 +59,25 @@ local on_attach = function(client, bufnr)
         ["ca"] = {vim.lsp.buf.code_action, "Code Action"},
         f = {vim.lsp.buf.format, "Format"}
       }
-    })
-    wk.register({["<leader>ca"] = {vim.lsp.buf.code_action, "Code Action"}},
-                {mode = "v"})
+    }, {mode = "n"})
+    wk.register({
+      g = {
+        name = "Goto",
+        D = {vim.lsp.buf.declaration, "Goto Declaration"},
+        d = {vim.lsp.buf.definition, "Goto Definition"},
+        i = {vim.lsp.buf.implementation, "Goto Implementation"},
+        r = {vim.lsp.buf.references, "Goto References"}
+      },
+      ["<leader>"] = {
+        ["wa"] = {vim.lsp.buf.add_workspace_folder, "Add workspace folder"},
+        ["wr"] = {vim.lsp.buf.remove_workspace_folder, "Remove workspace folder"},
+        k = {vim.lsp.buf.hover, "Hover"},
+        D = {vim.lsp.buf.type_definition, "Goto Type Definition"},
+        ["rn"] = {vim.lsp.buf.rename, "Rename"},
+        ["ca"] = {vim.lsp.buf.code_action, "Code Action"},
+        f = {vim.lsp.buf.format, "Format"}
+      }
+    }, {mode = "x"})
   else
     local bufopts = {noremap = true, silent = true, buffer = bufnr}
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
