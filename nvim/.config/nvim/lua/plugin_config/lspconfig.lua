@@ -60,6 +60,8 @@ local on_attach = function(client, bufnr)
         f = {vim.lsp.buf.format, "Format"}
       }
     })
+    wk.register({["<leader>ca"] = {vim.lsp.buf.code_action, "Code Action"}},
+                {mode = "v"})
   else
     local bufopts = {noremap = true, silent = true, buffer = bufnr}
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
