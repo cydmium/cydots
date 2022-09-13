@@ -6,7 +6,8 @@ local lsp_formatting = function(bufnr)
     filter = function(client)
       return client.name == "null-ls"
     end,
-    bufnr = bufnr
+    bufnr = bufnr,
+    timeout = 2000
   })
 end
 
