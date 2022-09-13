@@ -16,6 +16,7 @@ cfg = {
     ["-"] = actions.up,
     ["q"] = actions.quit,
 
+    ["N"] = actions.mkdir,
     ["K"] = actions.mkdir,
     ["d"] = actions.mkdir,
     ["n"] = actions.newfile,
