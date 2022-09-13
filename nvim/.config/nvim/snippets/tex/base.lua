@@ -162,6 +162,14 @@ table.insert(standard, s("tab", fmt([[
   })
 }), {condition = at_beginning_of_line}))
 
+-- TODO: Make short_name smart, ie. delete [] is short name is empty
+table.insert(standard,
+             s("acro", fmt([[\acro{{{typed}}}[{short_name}]{{{long_name}}}]], {
+  typed = i(1, "typed"),
+  short_name = i(2, "Short Name"),
+  long_name = i(3, "Long Name")
+})))
+
 -- TODO: Add figure environment
 
 -- begin statement
