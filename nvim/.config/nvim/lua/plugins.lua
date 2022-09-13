@@ -47,7 +47,11 @@ return require("packer").startup(function()
     requires = {"RRethy/nvim-treesitter-endwise", "p00f/nvim-ts-rainbow"}
   } -- smart syntax highlighting
 
-  use {"nvim-treesitter/playground", requires = {"nvim-treesitter/nvim-treesitter"}}
+  use {
+    "nvim-treesitter/playground",
+    cmd = {"TSPlaygroundToggle"},
+    requires = {"nvim-treesitter/nvim-treesitter"}
+  }
 
   -- Colorscheme
   use {"ellisonleao/gruvbox.nvim"}
@@ -80,6 +84,7 @@ return require("packer").startup(function()
   use {
     "nvim-lualine/lualine.nvim",
     requires = {"kyazdani42/nvim-web-devicons", opt = true},
+    event = "VimEnter",
     config = function()
       require("plugin_config.lualine")
     end
@@ -229,18 +234,18 @@ return require("packer").startup(function()
   }
 
   -- Refactoring Help
-  use {
-    "ThePrimeagen/refactoring.nvim",
-    requires = {{"nvim-lua/plenary.nvim"}, {"nvim-treesitter/nvim-treesitter"}}
-  }
+  -- use {
+  --   "ThePrimeagen/refactoring.nvim",
+  --   requires = {{"nvim-lua/plenary.nvim"}, {"nvim-treesitter/nvim-treesitter"}}
+  -- }
 
-  use {
-    "karb94/neoscroll.nvim",
-    event = "WinScrolled",
-    config = function()
-      require("plugin_config.neoscroll")
-    end
-  }
+  -- use {
+  --   "karb94/neoscroll.nvim",
+  --   event = "WinScrolled",
+  --   config = function()
+  --     require("plugin_config.neoscroll")
+  --   end
+  -- }
 
   -- Todo Quickfix/Highlights
   use {
