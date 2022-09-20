@@ -169,12 +169,16 @@ table.insert(standard, s("beg", fmt([[
 \begin{{{}}}
     {}
 \end{{{}}}
-]], {i(1), i(0), rep(1)}), {condition = at_beginning_of_line}))
+]], {i(1), i(0), rep(1)})))
 
 -- Partial derivative
 table.insert(standard,
              s("part", fmt([[\frac{{\partial {}}}{{\partial {}}}]], {i(1), i(2)}),
                {condition = tex.in_mathzone}))
+
+-- Color
+table.insert(standard,
+             s("color", fmt([[\textcolor{{{}}}{{{}}}]], {i(1, "red"), i(2, "text")})))
 
 -- Auto Snippets
 -- Display Math
