@@ -1,0 +1,16 @@
+#!/bin/sh
+# Update the screen brightness
+
+if [ $# -eq 0 ]; then
+	echo "No Arguments Supplied!"
+	exit
+elif ! [ $1 -eq $1 2> /dev/null ]; then
+	echo "Argument must be a number"
+	exit
+else
+	current_brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+	echo $current_brightness
+	new_brightness=$(( $current_brightness + $1 ))
+	echo $new_brightness
+	echo $new_brightness > /sys/class/backlight/intel_backlight/brightness
+fi

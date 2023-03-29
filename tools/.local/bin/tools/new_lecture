@@ -1,0 +1,18 @@
+#!/bin/sh
+# Create a new LaTeX file for lecture notes
+filename="$(date +%B%-d | awk '{print tolower($0)}').tex"
+if [ -f "$filename" ]; then
+	echo "File already exists. Aborting!"
+	exit 1
+fi
+date="$(date "+%B %-d, %G")"
+package_file=$HOME/.local/share/default_tex_packages
+macro_file=$HOME/.local/share/default_tex_macros
+
+echo "\\documentclass{article}\n" > $filename
+echo "\\\title{$date}\n" >> $filename
+sed 's/^\(\[[^]]*\]\)\?\(.*\)/\\usepackage\1{\2}/' $package_file >> $filename
+echo "" >> $filename
+echo "\\\cfoot{\\\thepage}\n" >> $filename
+cat $macro_file >> $filename
+echo "\n\\\begin{document}\n\\end{document}" >> $filename

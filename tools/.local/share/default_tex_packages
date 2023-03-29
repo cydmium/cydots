@@ -1,0 +1,7 @@
+fancyhdr
+amsmath
+amssymb
+[english]babel
+listings
+enumitem
+[margin=1.0in]geometry

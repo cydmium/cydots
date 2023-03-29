@@ -17,6 +17,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 export WORKON_HOME=~/.ve
 export PROJECT_HOME=~/projects
 eval "$(pyenv init --path)"
+export PATH="$PATH:$HOME/.luarocks/bin:$HOME/.npm-global/bin"
 
 if command -v nvim > /dev/null 2>&1; then
 	export EDITOR="nvim"
