@@ -14,7 +14,7 @@ vim.o.splitbelow = true
 vim.o.wildmode = "list:longest:full" -- List all matches > complete longest > complete next full match
 vim.o.scrolloff = 5 -- Maintain 5 lines above and below cusor
 
-vim.g.python3_host_prog = "~/.pyenv/versions/neovim/bin/python"
+vim.g.python3_host_prog = "~/.pyenv/versions/tools3/bin/python"
 
 -- Requires lir to be installed
 vim.g.loaded_netrw = 1
