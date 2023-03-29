@@ -32,6 +32,8 @@ colors:
 core:
   regular_file: {}
 
+  reset_to_normal: {}
+
   directory:
     foreground: blue
 
@@ -42,9 +44,13 @@ core:
   symlink:
     foreground: lightblue
 
+  multi_hard_link:
+    font-style: bold
+
   broken_symlink:
     foreground: black
     background: red
+
   missing_symlink_target:
     foreground: black
     background: red
@@ -53,9 +59,25 @@ core:
     foreground: black
     background: cyan
 
+  setuid:
+    foreground: foreground
+    background: red
+
+  setgid:
+    foreground: background
+    background: orange
+
+  file_with_capability:
+    foreground: background
+    background: red
+
   socket:
     foreground: black
     background: purple
+
+  door:
+    foreground: purple
+    font-style: bold
 
   character_device:
     foreground: purple

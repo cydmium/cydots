@@ -1,0 +1,117 @@
+.de LI
+.LIST
+.SHIFT_LIST 10p
+..
+.PARA_SPACE 1m
+.TITLE "System Overview"
+.AUTHOR "David Richardson"
+.DOCTYPE DEFAULT
+.PRINTSTYLE TYPESET
+.PT_SIZE 10
+.START
+To navigate this document, you can use vim movement keys.
+Additional movement commands are available in the zathura document, or via \f(CWman zathura\fP.
+.HEADING 1 "Hello!"
+.HEADING 2 "Document Goals"
+This document is intended to provide an overview of the different programs that make up the system.
+It will give the program that is being used, as well as some additional options if you wish to explore other programs.
+It is my hope that this document provides a better understanding of why I selected the programs I did and what areas can be improved.
+.HEADING 2 "Guiding Principles"
+I want to start by saying a large portion of this document is my personal opinion.
+If you disagree with me, great!
+Now, what makes software good.
+.LIST
+.ITEM
+\fBSimplicity\fP \(en
+A program should do one thing, and it should do it well. 
+Features are not always a good thing.
+Once a program starts adding features, it quickly becomes difficult to maintain.
+Additionally, if I don't need the feature, or another program implements the feature better, the program is now unnecessarily bloated.
+In general, this also allows programs to be modular and easily replaceable. 
+If a single program does too much, it becomes difficult to replace when a better alternative comes available; however, it is easy to replace a simple program with a better simple program.
+.ITEM
+\fBUsability\fP \(en
+The program should do what I want it to do.
+In some cases, this means I want a highly extensible program like dmenu.
+In others, I just want something to browse the web with like firefox.
+The point of this is to say that extensible is good, but it is not a requirement.
+.ITEM
+\fBCustomization\fP \(en
+This falls closely in line with usability.
+If a program doesn't behave exactly as I want by default, but it can made to do so, that is okay.
+Obviously, a perfect out of the box solution is ideal, but that will only rarely happen.
+In general, being able to customize a program to the desired result is a hallmark of good software.
+.ITEM
+\fBVim\fP \(en
+This seems like a silly guideline to follow, but if a program uses vim bindings (or can be made to) I will prefer it to an identical program that does not.
+Vim has become such a huge part of my daily workflow that the key bindings are second nature, so I want to use them everywhere.
+.LIST OFF
+Now, I want to take a second to talk about free and open source software (FOSS).
+This is something a lot of people care a lot about, but to me it is not very important.
+What I care about is having a good program.
+With that said, it is often the case the best program for the job is FOSS. 
+Proprietary software needs to be non-replaceable otherwise people won't pay for it.
+What that means is that proprietary software adds unnecessary features, and becomes large and uncustomizable.
+That is the opposite of what I want, so FOSS is often the best option.
+.HEADING 2 "Components of the System"
+.LIST
+.ITEM
+\fBWindow Manager or Desktop Environment\fP \(en
+This is the decision that will define how you use your computer.
+There are 3 main types of window managers, compositing, stacking, and tiling.
+Compositing is the most broad, and allows all windows to be drawn independently of all other widows.
+Stacking does exactly what it says it does, all windows get stacked on top of each other.
+.ITEM
+\fBTerminal Emulator\fP \(en
+.ITEM
+\fBShell\fP \(en
+.ITEM
+\fBText Editor\fP \(en
+.ITEM
+\fBWeb Browser\fP \(en
+.ITEM
+\fBFile Browser\fP \(en
+.ITEM
+\fBImage Viewer\fP \(en
+.ITEM
+\fBPDF Viewer\fP \(en
+.ITEM
+\fBE-mail Client\fP \(en
+.ITEM
+\fBFonts\fP \(en
+.ITEM
+\fBPDF Generator\fP \(en
+.LIST OFF
+.LIST
+.ITEM
+\fBWeb Browser\fP \(en
+Every non-terminal computer likely needs a web browser.
+The options in the space are much broader than you might expect, but I tend to play it fairly safe.
+I personally use firefox with vimium, but another keyboard driven browser is qute browser.
+Another interesting option is surf, developed by the suckless group.
+.ITEM
+\fBText Editor\fP \(en
+The answer to this is neovim, and nothing else.
+But if you want to use the wrong answer, you can always use emacs or even nano if you're crazy. 
+.ITEM
+\fBShells\fP \(en
+I will always recommend one of bash, zsh, or fish.
+I will also suggest a strict posix compliant shell to be linked as /bin/sh.
+Some examples of these are dash or mksh.
+When deciding between your primary shell, bash is the most basic, zsh adds a lot of customizability, and fish has nicer defaults.
+Fish is not posix compliant, so you need to be careful running scripts in fish.
+.ITEM
+\fBProgram Launcher\fP \(en
+This is an interesting item, because it is not strictly necessary.
+All of these programs function similarly, but the UX is different for each.
+The options are dmenu, rofi, or fzf. 
+Both dmenu and rofi are fairly straight forward to setup as a program launcher, but fzf is a bit more challenging.
+Fzf is a command line tool, so it must be run inside a shell.
+This requires a terminal be opened in order to run fzf as a launcher.
+There are some ways to use floating windows to create a similar experience to rofi, but those are not covered here.
+.ITEM
+\fBPDF Viewer\fP \(en
+I really enjoy zathura as my pdf viewer.
+It has vim bindings, is lightweight, and is easy to use.
+There are some other options that are more mouse based, or resource heavy, but I haven't found any reason to switch.
+.LIST OFF

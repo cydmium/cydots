@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Define clip and primary as the contents of the system clipboard and primary clipboard
+clip=$(xclip -o -selection clipboard)
+primary=$(xclip -o -selection primary)
+
+# Check if clipboard is empty ([ -n "$var" ]) and send a notification
+[ -n "$clip" ] && notify-send "Clipboard:" "$clip"
+[ -n "$primary" ] && notify-send "Clipboard:" "$primary"

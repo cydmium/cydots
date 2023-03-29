@@ -1,0 +1,10 @@
+#!/bin/bash
+# dmenu prompt to open a paper in the references folder
+
+reference_dir=$HOME/documents/articles
+choice=$(ls $reference_dir | dmenu -fn "Inconsolata-12")
+if [ -z "$choice" ]; then
+	exit 1
+else
+	zathura $reference_dir/$choice
+fi

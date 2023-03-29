@@ -1,0 +1,255 @@
+.de LI
+.LIST
+.SHIFT_LIST 10p
+..
+.PARA_SPACE 1m
+.TITLE "Vim \(en The Best Editor"
+.AUTHOR "David Richardson"
+.DOCTYPE DEFAULT
+.PRINTSTYLE TYPESET
+.PT_SIZE 10
+.START
+To navigate this document, you can use vim keys (\f(CWh/j/k/l\fP).
+Additional movement commands are described in the Zathura document via \f(CWMod+F2\fP or \f(CWman zathura\fP.
+.HEADING 1 "Hello!"
+.HEADING 2 "Why is vim the best?"
+The short answer is: because that's my opinion.
+The long answer really boils down to cutomization and capabilities.
+There are so many things you can customize in vim, and it can really be made to work exactly as you would like. 
+Additionally, it seems I am constantly learning new cool things that are already built into vim.
+Vim really does so much more than you would expect when you first start using it.
+With all that said, I do prefer neovim to standard vim.
+Neovim is a fork of vim that removes some backwards compatibility in exchange for more significant feature development.
+.HEADING 2 "My philosophy for vim configuration"
+Before I get into what I think, know there is no correct way to use vim.
+Everyone will use it a little differently, and that is okay.
+These next items are in order of priority.
+.LIST
+.ITEM
+\fBUsability\fP \(en
+The most important aspect of my vim configuration is that it should do everything I want it to do.
+If that means a plugin is best suited for the job, then that plugin gets installed.
+If that means a default configuration is best, then the default goes.
+.ITEM
+\fBBuilt-Ins First\fP \(en
+If vim has a capability built into it, that should be prioritized over an external plugin where possible. 
+That does not mean that capability will not be rebound to be easier to use. 
+This DOES NOT mean I dislike plug-ins.
+.ITEM
+\fBBeauty\fP \(en
+Lastly, the editor should look nice. 
+This doesn't affect the actual usage, but it does make everything a little more pleasant.
+.LIST OFF
+.HEADING 1 "Cheatsheet"
+All of these keybinds are either native to vim, or set in my vimrc file. 
+Everything in this document can be customized by editing the vimrc.
+If you are using my complete configuration, you can quickly open the file with \f(CWevim\fP.
+.HEADING 2 "Keybinds"
+Before I start, it is important to know that this is by no means an exhaustive list.
+These keybindings are only what I have found useful, or think may be useful to someone starting out with vim.
+If you have never used vim before, I recommend starting with \f(CWvimtutor\fP.
+If you prefer a more visual representation of many of these keybinds, refer to 
+.PDF_WWW_LINK "http://www.viemu.com/vi-vim-cheat-sheet.gif" "this cheatsheet"
+.PP
+Many of these keybinds can be prefaced by a number to repeat the command [count] times.
+If there is no count preceding the command, the default is generally 1.
+I will do my best to indicate where this is the case.
+I have tried to separate into the following categories:
+.LIST
+.ITEM
+\fBGeneral Movement\fP
+.ITEM
+\fBJumps\fP
+.ITEM
+\fBEditting\fP
+.ITEM
+\fBCommand-line Mode Commands\fP
+.LIST OFF
+.HEADING 3 "General Movement"
+.LIST
+.ITEM
+\f(CWh\fP \(en Move to the left [count] character(s)
+.ITEM
+\f(CWj\fP \(en Move down [count] lines
+.FOOTNOTE
+Both \f(CWj\fP and \f(CWk\fP have been rebound to \f(CWgj\fP and \f(CWgk\fP in my configuration.
+This allows them to move up/down based on how the lines are displayed when lines wrap.
+.FOOTNOTE OFF
+.ITEM
+\f(CWk\fP \(en Move up [count] lines
+.ITEM
+\f(CWl\fP \(en Move right [count] character(s)
+.ITEM
+\f(CW0\fP \(en Move to the first character on the line
+.ITEM
+\f(CW^\fP \(en Move to the first non-blank character on the line
+.ITEM
+\f(CWf{char}\fP \(en Move the [count]th occurrence of {char} to the right
+.ITEM
+\f(CWF{char}\fP \(en Move the [count]th occurrence of {char} to the left
+.ITEM
+\f(CWt{char}\fP \(en Same as \f(CWf\fP, but the cursor is placed on the character left of {char}
+.ITEM
+\f(CWT{char}\fP \(en Same as \f(CWF\fP, but the cursor is placed on the character right of {char}
+.ITEM
+\f(CW;\fP \(en Repeats last \f(CWf\fP,\f(CWt\fP,\f(CWF\fP, or \f(CWT\fP [count] times
+.ITEM
+\f(CW,\fP \(en Repeats last \f(CWf\fP,\f(CWt\fP,\f(CWF\fP, or \f(CWT\fP times in the opposite direction
+\f(CWw\fP \(en Moves forward [count] word(s), does not include special characters
+.ITEM
+\f(CWW\fP \(en Same as \f(CWw\fP, but does include special characters
+.ITEM
+\f(CWe\fP \(en Move forward to the end of word [count], does not include special characters
+.ITEM
+\f(CWE\fP \(en Same as \f(CWe\fP, but does include special characters
+.ITEM
+\f(CWb\fP \(en Move backward [count] word(s), does not include special characters
+.ITEM
+\f(CWB\fP \(en Same as \f(CWb\fP, but does include special characters
+.ITEM
+\f(CWCtrl+e\fP \(en Scroll the page down
+.FOOTNOTE
+Depending on my mood, the scrolling keybinds (Ctrl+e, Ctrl+y) may be sped up between 1x and 3x speed.
+.FOOTNOTE OFF
+.ITEM
+\f(CWCtrl+y\fP \(en Scroll the page up
+.ITEM
+\f(CWCtrl+d\fP \(en Half-Page down
+.ITEM
+\f(CWCtrl+u\fP \(en Half-Page up
+.ITEM
+\f(CWCtrl+f\fP \(en Page down
+.ITEM
+\f(CWCtrl+b\fP \(en Page up
+.LIST OFF
+Using \f(CWh/j/k/l\fP by themselves may seem sufficient for moving around, but that is not efficient.
+For moving left and right, you should be using w and b at least, probably using counts to move more quickly.
+For moving up and down, I recommend using [count]\f(CWj/k\fP, scroll binds, or half/full page up/down.
+Combining [count]\f(CWj/k\fP with relative linenumbers (discussed in the settings section) is a great way to quickly move up and down a document.
+Later, I will discuss a plugin that can also be used to rapidly move between different areas.
+.HEADING 3 "Jumps"
+I wanted to distinguish general movement from jumps because they feel very different to use.
+With general movement, it tends to feel fluid (with the exception of [count] commands), but jump commands feel "jumpy."
+There are also a few "jump" commands that don't actually move the cursors location in the file.
+.LIST
+.ITEM
+\f(CWgg\fP \(en Moves to first line in the file
+.ITEM
+\f(CWG\fP \(en Moves to last line in the file
+.ITEM
+\f(CW<line number>G\fP \(en Goto <line number>
+.ITEM
+\f(CWz<CR>\fP \(en Move the current line to the top of the view
+.ITEM
+\f(CWzt\fP \(en Same as \f(CWz<CR>\fP, but maintain horizontal cursor position
+.ITEM
+\f(CWz.\fP \(en Move the current line to the middle of the view
+.ITEM
+\f(CWzz\fP \(en Same as \f(CWz.\fP, but maintain horizontal cursor position
+.ITEM
+\f(CWz-\fP \(en Move the current line to the middle of the view
+.ITEM
+\f(CWzb\fP \(en Same as \f(CWz-\fP, but maintain horizontal cursor position
+.ITEM
+\f(CWH\fP \(en Jump to the top of the screen
+.ITEM
+\f(CWM\fP \(en Jump to the middle of the screen
+.ITEM
+\f(CWL\fP \(en Jump to the last line on the screen
+.ITEM
+\f(CWm{a..zA..Z}\fP \(en Create a mark {a..zA..Z}
+.ITEM
+\f(CW`{a..zA..Z}\fP \(en Jump to mark {a..zA..Z}
+.ITEM
+\f(CW'{a..zA..Z}\fP \(en Jump to first character in line containing mark {a..zA..z}
+.ITEM
+\f(CW%\fP \(en Jump to matching paren/bracket/brace
+.LIST OFF
+.HEADING 3 "Editting"
+.HEADING 4 "Insertion"
+.LIST
+.ITEM
+\f(CWi\fP \(en Enter insert mode at cursor position
+.ITEM
+\f(CWI\fP \(en Enter insert mode at start of line
+.ITEM
+\f(CWa\fP \(en Append text after cursor position
+.ITEM
+\f(CWA\fP \(en Append text after end of line
+.ITEM
+\f(CWo\fP \(en Create new line below current line, and enter insert mode
+.ITEM
+\f(CWO\fP \(en Create new line above current line, and enter insert mode
+.LIST OFF
+.HEADING 4 "Changing Existing Text"
+.LIST
+.ITEM
+\f(CWr\fP \(en Replace a single character
+.ITEM
+\f(CWR\fP \(en Replace multiple characters
+.ITEM
+\f(CWs\fP \(en Change (swap) [count] character(s)
+.ITEM
+\f(CWc<motion>\fP \(en Change text covered by <motion>
+.FOOTNOTE
+Special cases include 
+.PP
+\f(CWcw\fP \(en Change until end of current word
+.PP
+\f(CWC\fP \(en Change until end of current line
+.PP
+\f(CWcc\fP \(en Change whole line (\f(CWS\fP is synonymous with \f(CWcc\fP)
+.FOOTNOTE OFF
+.ITEM
+\f(CWu\fP \(en Undo last action
+.ITEM
+\f(CWCtrl+r\fP \(en Redo last undo
+.LIST OFF
+.HEADING 4 "Copy and Delete"
+.LIST
+.ITEM
+\f(CWx\fP \(en Delete [count] character(s)
+.ITEM
+\f(CWd<motion>\fP \(en Delete text covered by <motion>. This has the same special cases as \f(CWc\fP.
+.ITEM
+\f(CWy<motion>\fP \(en Yank text covered by <motion> into paste buffer
+.ITEM
+\f(CWyy\fP \(en Yank entire line into paste buffer
+.ITEM
+\f(CWp\fP \(en Paste buffer below current line
+.ITEM
+\f(CWP\fP \(en Paste buffer above current line
+.LIST OFF
+.HEADING 3 "Command-line Commands"
+This section is much less about actual keybinds and more about what useful commands exist in vim's command line mode.
+.LIST
+.ITEM
+\f(CW:w\fP \(en Write the current buffer, can be followed by a string to write to a specific filename
+.ITEM
+\f(CW:up\fP \(en Write the current buffer if it has changed, otherwise do nothing
+.ITEM
+\f(CW:q\fP \(en Quit
+.ITEM
+\f(CW:make\fP \(en Run the command specified by makeprg (default is make)
+.ITEM
+\f(CW:<line number>\fP \(en Jump to <line number>, same as \f(CW<line number>G\fP
+.ITEM
+\f(CW:help <command>\fP \(en Opens help documentation for <command>
+.ITEM
+\f(CW:e <file>\fP \(en Open <file> in a new buffer
+.ITEM
+\f(CW:find <file>\fP \(en Same as \f(CW:e\fP, but tries to search for the file
+.HEADING 2 "Plugins and why you might not need them"
+I'm not going to lie, plugins are great and can be extremely useful.
+With that said, I think it is extremely important to understand how vim can do some of the same things plugins do. 
+.HEADING 3 "Git Integration"
+I know I titled this section why you might be able to go without some plugins, but I'm going to start out with a plugin that I consider a must have if you ever use git.
+That plugin is 
+.PDF_WWW_LINK "https://github.com/tpope/vim-fugitive" "fugitive by Tim Pope."
+Fugitive brings practically every git command you can run in terminal into vim, and integrates everything seamlessly. 
+It is probably the best tool out there for managing merges and diffs between commits. 
+Now with all that said, go read the documentation. 
+This document is not for me to spell out every little thing for you, instead it should be used as a reference for using vim.
+Here is a link to a wonderful 
+.PDF_WWW_LINK "http://vimcasts.org/episodes/fugitive-vim---a-complement-to-command-line-git/" "screencast"
+on how to use fugitive.

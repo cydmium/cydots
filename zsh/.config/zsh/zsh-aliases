@@ -22,3 +22,6 @@ alias du='du -h'
 # Ask before overwrite
 alias mv='mv -i'
 alias cp='cp -i'
+
+# Todo
+alias todo='todo.sh'

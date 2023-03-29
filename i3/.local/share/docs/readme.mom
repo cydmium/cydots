@@ -1,0 +1,123 @@
+.de LI
+.LIST
+.SHIFT_LIST 10p
+..
+.PARA_SPACE 1m
+.TITLE "A Guide to Using This System"
+.AUTHOR "David Richardson"
+.DOCTYPE DEFAULT
+.PRINTSTYLE TYPESET
+.PT_SIZE 10
+.START
+If you are viewing this document through the i3 shortcut, you are in a program called Zathura. 
+To navigate the document, you should use vim keys (\f(CWh/j/k/l\fP).
+To adjust zoom settings, you can use \f(CW+\fP and \f(CW-\fP to zoom in or out, or you can use \f(CWs\fP to zoom to the window width (revert with \f(CWa\fP).
+\f(CWf\fP will highlight links which can then be followed using a number + \f(CWEnter\fP.
+To close the pdf, simply press \f(CWq\fP.
+All of these are default to Zathura, but you can add additional customizations in \f(CW~/.config/zathura/zathurarc\fP.
+.LIST
+.ITEM
+\f(CWMod+F1\fP will pull this document up for your reference
+.ITEM
+\f(CWMod\fP refers to the key set in the i3 config.
+In this configuration, it is the Super Key, aka the Windows Key.
+.LIST OFF
+.HEADING 1 "Hello!"
+.HEADING 2 "My philosophy for this installation:"
+Much of this installation has been guided by
+.PDF_WWW_LINK "https://lukesmith.xyz" "Luke Smith."
+In particular, his LARBS post installation script has given me significant inspiration for how to configure and work with my own system.
+I even stole the layout of this document from his readme.mom (partly because I don't know how to use groff at all).
+.LIST
+.ITEM
+\fBEase of Use\fP \(en
+Anything you want to do should be easy to do.
+The system should be configured in such a way that keybindings are easy to remember and intuitive.
+All thinking should be applied to completing the task, not how to setup the environment necessary to perform well.
+.ITEM
+\fBMinimalistic Where Possible\fP \(en
+Programs should not be unnecessarily bloated; however, some programs (MATLAB, LaTeX) are necessary evils.
+This leads many programs to be terminal based to remove the overhead of GUIs.
+.ITEM
+\fBVIM!\fP \(en
+Vim is one of my favorite programs of all time.
+As such, any program that uses, or can be made to use, vim bindings is a big plus. 
+.ITEM
+\fBCustomization and Replaceability\fP \(en
+Programs installed on this system should be replaceable and highly customizable.
+This allows the user to make adjustments not only to the configuration of installed programs, but also to which programs are installed. 
+.LIST OFF
+.HEADING 2 "The Status Bar"
+.PP
+This section has not been completed yet.
+.HEADING 2 "Program Specific Information"
+At any time, you can press \f(CWMod+F2\fP to bring up a menu for more information on various programs.
+Simply select the program you want, and a PDF similar to this will be opened containing keybindings and general information about that program's configuration.
+Additionally, you can always refer to the man pages for the various programs, or in some cases the program's built in help function.
+.HEADING 1 "Key Bindings"
+.PP
+The bindings in this document can be found in the file \f(CW~/.config/i3/config\fP which can be opened via \f(CWei3\fP in the terminal.
+All of these bindings can be easily changed to your liking.
+.HEADING 2 "Basic Window Shortcuts"
+Play around with the bindings and things should start feeling comfortable\c
+.FOOTNOTE
+All of these shortcuts are case sensitive.
+i.e. \f(CWMod+W\fP is equivalent to \f(CWMod+Shift+w\fP.
+.FOOTNOTE OFF
+ . If something isn't working for you, go ahead and change things around.
+.LIST
+.ITEM
+\f(CWMod+Enter\fP \(en Launch a terminal (default is \f(CWURxvt\fP, use \f(CWman urxvt\fP for more information)
+.ITEM
+\f(CWMod+q\fP \(en Close window
+.ITEM
+\f(CWMod+Q\fP \(en Force close window
+.ITEM
+\f(CWMod+d\fP \(en \f(CWdmenu\fP (program launcher, use when a program does not have a shortcut)
+.ITEM
+\f(CWMod+t\fP \(en Toggle window spawn direction (veritcal/horizontal)
+.ITEM
+\f(CWMod+f\fP \(en Toggle fullscreen mode on currently selected window
+.ITEM
+\f(CWMod+h/j/k/l\fP \(en Change selected window
+.ITEM
+\f(CWMod+H/J/K/L\fP \(en Move selected window
+.ITEM
+\f(CWMod+Y/U/I/O\fP \(en Resize windows
+.ITEM
+\f(CWMod+D\fP \(en Remove all gaps
+.ITEM
+\f(CWMod+T\fP \(en Reset gaps to default
+.LIST OFF
+.HEADING 2 "Programs"
+This list uses the set of programs I prefer.
+If you have alternative or additional programs, you can add them to the i3 configuration.
+.LIST
+.ITEM
+\f(CWMod+w\fP \(en Graphical browser (default is \f(CWfirefox\fP)
+.ITEM
+\f(CWMod+W\fP \(en Command line browser (default is \f(CWw3m\fP, see \f(CWman w3m\fP for more information)
+.ITEM
+\f(CWMod+r\fP \(en File browser (default is \f(CWranger\fP, see \f(CWman ranger\fP for more information)
+.ITEM
+\f(CWMod+y\fP \(en Drop down calculator
+.ITEM
+\f(CWMod+u\fP \(en Drop down terminal (uses \f(CWtmux\fP)
+.ITEM
+\f(CWMod+i\fP \(en Calendar (default is \f(CWcalcurse\fP, see \f(CWman calcurse\fP for more information)
+.ITEM
+\f(CWMod+o\fP \(en htop (system usage and process information)
+.ITEM
+\f(CWMod+m\fP \(en matlab (see \f(CWpython\fP for a better language j/k)
+.LIST OFF
+.HEADING 2 "System"
+.LIST
+.ITEM
+\f(CWMod+x\fP \(en Lock screen (default is \f(CWi3lock\fP)
+.ITEM
+\f(CWMod+X\fP \(en Shutdown (will prompt for confirmation)
+.ITEM
+\f(CWMod+Shift+Backspace\fP \(en Reboot (will prompt for confirmation
+.ITEM
+\f(CWMod+Shift+Escape\fP \(en Exit i3 (will prompt for confirmation)
+.LIST OFF
