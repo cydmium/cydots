@@ -52,7 +52,6 @@ return require("packer").startup(function()
   -- Tree Sitter
   use {
     "nvim-treesitter/nvim-treesitter",
-    event = "BufWinEnter",
     run = ":TSUpdate",
     config = function()
       require("config.treesitter")
@@ -146,6 +145,13 @@ return require("packer").startup(function()
       "Gedit"
     },
     ft = {"fugitive"}
+  }
+
+  use {
+    "kylechui/nvim-surround",
+    config = function()
+      require("nvim-surround").setup {}
+    end
   }
 
   -- Null-LS: Hook non-language server features into LSP protocol
