@@ -61,4 +61,21 @@ return {
       require("config.rainbow")
     end
   },
+
+  -- Better netrw
+  {
+    "stevearc/oil.nvim",
+    config = function()
+      require("config.oil")
+    end
+  },
+
+  -- Highlight indentation level
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    config = function()
+      require("config.blankline")
+    end
+  },
 }
