@@ -1,6 +1,8 @@
-autoload -Uz compinit
 export LS_COLORS=$(vivid generate everforest)
+
+autoload -Uz compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' completer _extensions _complete _approximate
 zstyle ':completion:*' list-colors "${LS_COLORS}"
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
 zmodload zsh/complist
@@ -12,8 +14,8 @@ autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
-bindkey "^[OA" up-line-or-beginning-search
-bindkey "^[OB" down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
  
 # Edit line in vim with ctrl-e
 autoload edit-command-line; zle -N edit-command-line
@@ -29,14 +31,22 @@ bindkey "^[[Z" menu-complete
 source "$ZDOTDIR/zsh-functions"
 
 # Source config files
+# zsh_add_file "zsh-completion"
 zsh_add_file "zsh-aliases"
 zsh_add_file "zsh-git-aliases"
 zsh_add_file "zsh-options"
 zsh_add_file "zsh-prompt"
 
 # Plugins
+zsh_add_plugin "marlonrichert/zsh-autocomplete"
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
+
+# Autocomplete settings
+bindkey -M menuselect '^p' vi-backward-char
+bindkey -M menuselect '^n' vi-forward-char
+bindkey '^n' down-line-or-select
+bindkey '^p' up-line-or-search
 
 # Autosuggest Settings
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20

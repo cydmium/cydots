@@ -1,0 +1,9 @@
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*:(cd|mv|cp):*' ignore-parents parent pwd
+zstyle ':completion:*' completer _extensions _complete _approximate
+zstyle ':completion:*' list-colors "${LS_COLORS}"
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zmodload zsh/complist
+
+_comp_options+=(globdots)
