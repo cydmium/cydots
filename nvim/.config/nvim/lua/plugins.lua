@@ -28,9 +28,31 @@ return require("packer").startup(function()
     end
   }
 
+  -- Bufferline
+  use {
+    "akinsho/bufferline.nvim",
+    requires = {"kyazdani42/nvim-web-devicons", opt = true},
+    cond = vim.fn.has("termguicolors"),
+    event = "BufWinEnter",
+    config = function()
+      require("config.bufferline")
+    end
+  }
+
+  -- Statusline
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = {"kyazdani42/nvim-web-devicons", opt = true},
+    event = "VimEnter",
+    config = function()
+      require("config.lualine")
+    end
+  }
+
   -- Tree Sitter
   use {
     "nvim-treesitter/nvim-treesitter",
+    event = "BufWinEnter",
     run = ":TSUpdate",
     config = function()
       require("config.treesitter")
@@ -39,6 +61,7 @@ return require("packer").startup(function()
 
   use {
     "windwp/nvim-autopairs",
+    event = "InsertEnter",
     config = function()
       require("config.autopairs")
     end
@@ -46,6 +69,7 @@ return require("packer").startup(function()
 
   use {
     "RRethy/nvim-treesitter-endwise",
+    event = "InsertEnter",
     config = function()
       require("config.endwise")
     end
@@ -53,9 +77,75 @@ return require("packer").startup(function()
 
   use {
     "HiPhish/nvim-ts-rainbow2",
+    event = "BufWinEnter",
     config = function()
       require("config.rainbow")
     end
+  }
+
+  -- Telescope
+  use {
+    "nvim-telescope/telescope.nvim",
+    requires = {{"nvim-lua/plenary.nvim"}},
+    config = function()
+      require("config.telescope")
+    end
+  }
+  use {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    run = "make",
+    requires = {{"nvim-telescope/telescope.nvim"}}
+  }
+
+  -- Comment
+  use {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("config.comment")
+    end,
+    keys = {
+      {"n", "gcc"},
+      {"n", "gcO"},
+      {"n", "gco"},
+      {"n", "gck"},
+      {"n", "gcj"},
+      {"v", "gc"},
+      {"n", "bcc"},
+      {"n", "bck"},
+      {"n", "bcj"},
+      {"v", "bc"}
+    }
+  }
+
+  -- Git Signs (Indicate Git changes)
+  use {
+    "lewis6991/gitsigns.nvim",
+    cond = is_git_repo,
+    config = function()
+      require("config.gitsigns")
+    end
+    -- tag = "release" -- To use the latest release
+  }
+
+  -- Git Wrapper
+  use {
+    "tpope/vim-fugitive",
+    cmd = {
+      "G",
+      "Git",
+      "Gdiffsplit",
+      "Gread",
+      "Gwrite",
+      "Ggrep",
+      "GMove",
+      "GDelete",
+      "GBrowse",
+      "GRemove",
+      "GRename",
+      "Glgrep",
+      "Gedit"
+    },
+    ft = {"fugitive"}
   }
 
   -- Null-LS: Hook non-language server features into LSP protocol
