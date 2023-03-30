@@ -1,20 +1,10 @@
-local colorschemes = {
-  "onedark",
-  "one-nvim",
-  "gruvbox",
-  "gruvbox-material",
-  "everforest",
-  "dracula",
-  "rose-pine",
-  "catppuccin"
-}
 vim.o.termguicolors = true
 if packer_plugins["onedark.nvim"] then
   require("onedark").setup {style = "dark"}
 end
 if packer_plugins["everforest"] then
   vim.g.everforest_better_performance = true
-  vim.g.everforest_background = "hard" -- soft, medium, hard
+  vim.g.everforest_background = "medium" -- soft, medium, hard
 end
 if packer_plugins["gruvbox-material"] then
   vim.g.gruvbox_material_better_performance = true

@@ -20,6 +20,14 @@ return require("packer").startup(function()
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
 
+  -- Colorscheme
+  use {
+    "sainnhe/everforest",
+    config = function()
+      require("colorscheme")
+    end
+  }
+
   -- Tree Sitter
   use {
     "nvim-treesitter/nvim-treesitter",
