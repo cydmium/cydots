@@ -1,0 +1,20 @@
+#!/bin/sh
+# This script is based on Luke Smith's old getbib script
+
+[ -z "$1" ] && echo "Requires PDF file (or doi) as argument!"
+
+if [ -f "$1" ]; then
+	# Attempt to capture DOI from file
+	doi=$(pdfinfo "$1" | grep -io "doi:.*" | sed "s/doi://") ||
+	doi=$(pdftotext "$1" | grep -io "doi:.*" -m 1 | sed "s/doi://")
+else
+	doi="$1"
+fi
+
+if [ ! -z "$doi" ]; then
+	# Pull bibtex entry from dx.doi.org and add newlines
+	curl -sLH "Accept: text/bibliography; style=bibtex" "http://dx.doi.org/$doi" | sed "s/^[ ]*//" | sed -E "s/, (\S{1,}=)/,\n  \1/g" | sed -E "s/\}\}[ ]*$/\},\n\}/" >> $BIB
+else
+	# If doi is not found, load pdfinfo and bib file into vim
+	pdfinfo "$1"  | nvim +"setlocal buftype=nofile" +"file PDF Info" - +"vsplit $BIB"
+fi
