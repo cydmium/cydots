@@ -1,5 +1,5 @@
 autoload -Uz compinit
-export LS_COLORS=$(vivid generate gruvbox)
+export LS_COLORS=$(vivid generate everforest)
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${LS_COLORS}"
 zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
