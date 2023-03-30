@@ -1,0 +1,141 @@
+colors:
+  # Theme colors
+  background: '2d353b'
+  darkyellow: 'd79921'
+  darkgray: '928374'
+
+  gray: 'a89984'
+  red: 'e67e80'
+  green: 'a7c080'
+  yellow: 'dbbc7f'
+  blue: '7fbbb3'
+  purple: 'd699b6'
+  cyan: '83c092'
+  foreground: 'd3c6aa'
+  orange: 'e69875'
+
+  # Others
+  white: "ffffff"
+  black: "1d2021"
+  gold: "b3a369"
+  khaki: "f0e68c"
+  dimgray: "7a8478"
+  brightgreen: "93bb26"
+  lightblue: 'cddfe6'
+
+core:
+  regular_file: {}
+
+  reset_to_normal: {}
+
+  directory:
+    foreground: blue
+
+  executable_file:
+    foreground: green
+    font-style: bold
+
+  symlink:
+    foreground: lightblue
+
+  multi_hard_link:
+    font-style: bold
+
+  broken_symlink:
+    foreground: black
+    background: red
+
+  missing_symlink_target:
+    foreground: black
+    background: red
+
+  fifo:
+    foreground: black
+    background: cyan
+
+  setuid:
+    foreground: foreground
+    background: red
+
+  setgid:
+    foreground: background
+    background: orange
+
+  file_with_capability:
+    foreground: background
+    background: red
+
+  socket:
+    foreground: black
+    background: purple
+
+  door:
+    foreground: purple
+    font-style: bold
+
+  character_device:
+    foreground: purple
+    background: darkgray
+
+  block_device:
+    foreground: cyan
+    background: darkgray
+
+  normal_text:
+    {}
+
+  sticky:
+    {}
+
+  sticky_other_writable:
+    {}
+
+  other_writable:
+    {}
+
+text:
+  special:
+    foreground: background
+    background: khaki
+
+  todo:
+    font-style: bold
+
+  licenses:
+    foreground: gray
+
+  configuration:
+    foreground: purple
+
+  other:
+    foreground: darkyellow
+
+markup:
+  foreground: gold
+
+programming:
+  source:
+    foreground: yellow
+
+  tooling:
+    foreground: foreground
+
+    continuous-integration:
+      foreground: khaki
+
+media:
+  foreground: orange
+
+office:
+  foreground: khaki
+
+archives:
+  foreground: red
+  font-style: underline
+
+executable:
+  foreground: brightgreen
+  font-style: bold
+
+unimportant:
+  foreground: dimgray
