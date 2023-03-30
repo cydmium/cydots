@@ -14,7 +14,7 @@ end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 nls.setup({
-    sources = {
+  sources = {
     builtins.formatting.lua_format.with({
       args = {
         "-i",
@@ -29,20 +29,23 @@ nls.setup({
         "--chop-down-table"
       }
     }),
-        builtins.formatting.black,
-        builtins.formatting.isort,
-        builtins.formatting.clang_format,
-    },
-    on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                  lsp_formatting(bufnr)
-                end,
-            })
+    builtins.formatting.black,
+    builtins.formatting.isort,
+    builtins.diagnostics.flake8.with({
+      extra_args = {"--extend-ignore=E203", "--max-line-length=88"}
+    }),
+    builtins.formatting.clang_format
+  },
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          lsp_formatting(bufnr)
         end
-    end,
+      })
+    end
+  end
 })

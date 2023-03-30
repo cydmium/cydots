@@ -16,7 +16,7 @@ local function is_git_repo()
   return vim.v.shell_error == 0
 end
 
-return require("packer").startup(function()
+return require("packer").startup(function(use)
   -- Packer can manage itself
   use "wbthomason/packer.nvim"
 
@@ -161,6 +161,44 @@ return require("packer").startup(function()
     requires = {"nvim-lua/plenary.nvim"},
     config = function()
       require("config.null_ls")
+    end
+  }
+
+  -- LSP Support
+  use {"williamboman/mason.nvim"}
+  use {"williamboman/mason-lspconfig.nvim"}
+  use {"folke/neodev.nvim"}
+  use {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("config.lspconfig")
+    end
+  }
+
+  -- Vimtex for LaTeX
+  use {
+    "lervag/vimtex",
+    config = function()
+      require("config.vimtex")
+    end,
+    ft = {"tex"}
+  }
+
+  -- Better netrw
+  use {
+    "tamago324/lir.nvim",
+    requires = {"nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons"},
+    config = function()
+      require("config.lir")
+    end
+  }
+
+  -- Highlight indentation level
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufRead",
+    config = function()
+      require("config.blankline")
     end
   }
 
