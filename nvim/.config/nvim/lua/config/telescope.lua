@@ -16,7 +16,15 @@ require("telescope").setup {
         ["<c-j>"] = actions.move_selection_next,
         ["<c-k>"] = actions.move_selection_previous
       }
-    }
+    },
+    cache_picker = {num_pickers = 10},
+    dynamic_preview_title = true,
+    layout_strategy = "vertical",
+    layout_config = {
+      vertical = {width = 0.9, height = 0.9, preview_height = 0.6, preview_cutoff = 0}
+    },
+    path_display = {"smart", shorten = {len = 3}},
+    wrap_results = true
   },
   extensions = {
     fzf = {
@@ -25,8 +33,10 @@ require("telescope").setup {
       override_file_sorter = true, -- override the file sorter
       case_mode = "smart_case" -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
-    }
+    },
+    ["ui-select"] = {require("telescope.themes").get_dropdown {}}
   }
 }
 
 require("telescope").load_extension("fzf")
+require("telescope").load_extension("ui-select")
