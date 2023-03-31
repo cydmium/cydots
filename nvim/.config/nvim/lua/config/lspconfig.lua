@@ -48,9 +48,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
-require("lspconfig")["pyright"].setup {}
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+require("lspconfig")["pyright"].setup {capabilities = capabilities}
 require("lspconfig")["lua_ls"].setup {
+  capabilities = capabilities,
   settings = {Lua = {workspace = {checkThirdParty = false}}}
 }
-require("lspconfig")["clangd"].setup {}
-require("lspconfig")["texlab"].setup {}
+require("lspconfig")["clangd"].setup {capabilities = capabilities}
+require("lspconfig")["texlab"].setup {capabilities = capabilities}

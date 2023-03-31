@@ -30,7 +30,7 @@ return {
       {"gco"},
       {"gck"},
       {"gcj"},
-      {"gc"},
+      {"gc", mode = "v"},
       {"bcc"},
       {"bck"},
       {"bcj"},

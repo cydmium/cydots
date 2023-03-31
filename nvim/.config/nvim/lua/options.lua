@@ -11,7 +11,7 @@ vim.o.hidden = true -- Allow changing buffers without saving
 -- Tend to open splits towards the bottom right
 vim.o.splitright = true
 vim.o.splitbelow = true
-vim.o.wildmode = "list:longest:full" -- List all matches > complete longest > complete next full match
+vim.o.wildmode = "longest:full" -- List all matches > complete longest > complete next full match
 vim.o.scrolloff = 5 -- Maintain 5 lines above and below cusor
 
 vim.g.python3_host_prog = "~/.pyenv/versions/tools3/bin/python"

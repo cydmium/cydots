@@ -1,3 +1,4 @@
+-- TODO: Rewrite this whole thing
 local ls = require("luasnip")
 ls.config.set_config {
   history = true,
@@ -113,20 +114,8 @@ function dynamic_node_external_update(func_indx)
 end
 
 -- Keybinds
-if packer_plugins["which-key.nvim"] and packer_plugins["which-key.nvim"].loaded then
-  local wk = require("which-key")
-  wk.register({
-    [","] = {
-      [",s"] = {
-        "<cmd>source ~/.config/nvim/lua/plugin_config/luasnip.lua<cr>",
-        "Source Luasnips"
-      }
-    }
-  })
-else
-  vim.keymap.set("n", "<leader><leader>s",
-                 "<cmd>source ~/.config/nvim/lua/plugin_config/luasnip.lua<cr>")
-end
+vim.keymap.set("n", "<leader><leader>s",
+               "<cmd>source ~/.config/nvim/lua/plugin_config/luasnip.lua<cr>")
 vim.keymap.set({"i", "s"}, "<c-l>", function()
   if ls.choice_active() then
     ls.change_choice(1)
