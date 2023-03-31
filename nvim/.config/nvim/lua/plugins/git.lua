@@ -8,6 +8,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     cond = is_git_repo,
+    event = "VeryLazy",
     config = function()
       require("config.gitsigns")
     end
@@ -33,5 +34,5 @@ return {
       "Gedit"
     },
     ft = {"fugitive"}
-  },
+  }
 }

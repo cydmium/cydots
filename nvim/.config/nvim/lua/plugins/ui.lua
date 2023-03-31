@@ -2,7 +2,7 @@ return {
   -- Colorscheme
   {
     "sainnhe/everforest",
-    lazy=false,
+    lazy = false,
     config = function()
       require("colorscheme")
     end
@@ -56,7 +56,7 @@ return {
 
   {
     "HiPhish/nvim-ts-rainbow2",
-    event = "BufWinEnter",
+    event = "VeryLazy",
     config = function()
       require("config.rainbow")
     end
@@ -73,9 +73,9 @@ return {
   -- Highlight indentation level
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufRead",
+    event = "VeryLazy",
     config = function()
       require("config.blankline")
     end
-  },
+  }
 }
