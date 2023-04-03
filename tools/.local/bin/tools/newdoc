@@ -1,0 +1,31 @@
+#!/bin/sh
+# Create a general purpose LaTeX document
+date="$(date "+%B %-d, %G")"
+if [ -z "$1" ]; then
+	filename="$(date +%B%d_%G | awk '{print tolower($0)}').tex"
+	title="$date"
+else
+	filename="$1.tex"
+	title="$(echo "$filename" | sed "s/_/ /g" | sed "s/.tex//g" | sed -E "s/\b(.)/\u\1/g")"
+fi
+
+if [ -f "$filename" ]; then
+	echo "File already exists. Aborting!"
+	exit 1
+fi
+
+package_file=$HOME/.local/share/default_tex_packages
+macro_file=$HOME/.local/share/default_tex_macros
+
+echo "\\documentclass{article}" > $filename
+echo "\\title{"$title"}" >> $filename
+echo "\\date{"$date"}" >> $filename
+echo "\\author{David Richardson}" >> $filename
+sed 's/^\(\[[^]]*\]\)\?\(.*\)/\\usepackage\1{\2}/' $package_file >> $filename
+echo "" >> $filename
+echo "\\cfoot{\\thepage}" >> $filename
+cat $macro_file >> $filename
+echo "\\begin{document}" >> $filename
+echo "\\maketitle" >> $filename
+echo "\\end{document}" >> $filename
+nvim $filename

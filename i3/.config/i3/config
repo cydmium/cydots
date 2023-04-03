@@ -71,7 +71,7 @@
 	# Set Screen resolution
 	#exec --no-startup-id $HOME/.screenlayout/fullRes.sh
 	# feh for background
-	exec_always --no-startup-id feh --bg-scale '/home/david/.config/background.jpg' 
+	exec_always --no-startup-id feh --bg-scale '/home/drichardson42/.config/background.jpg' 
 	# Sync calendar
 	exec --no-startup-id calcurse-caldav
 	# Location Service
