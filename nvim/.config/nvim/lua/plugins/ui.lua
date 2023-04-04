@@ -42,7 +42,8 @@ return {
     event = "InsertEnter",
     config = function()
       require("config.autopairs")
-    end
+    end,
+    dependencies = {"nvim-treesitter/nvim-treesitter"}
   },
 
   {
@@ -50,7 +51,8 @@ return {
     event = "InsertEnter",
     config = function()
       require("config.endwise")
-    end
+    end,
+    dependencies = {"nvim-treesitter/nvim-treesitter"}
   },
 
   {
@@ -58,7 +60,17 @@ return {
     event = "VeryLazy",
     config = function()
       require("config.rainbow")
-    end
+    end,
+    dependencies = {"nvim-treesitter/nvim-treesitter"}
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    event = "VeryLazy",
+    config = function()
+      require("config.textobjects")
+    end,
+    dependencies = {"nvim-treesitter/nvim-treesitter"}
   },
 
   -- Better netrw
