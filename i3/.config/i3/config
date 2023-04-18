@@ -28,8 +28,8 @@
 	# Mod1=<Alt>, Mod4=<Super>
 	set $mod Mod4
 	set $term --no-startup-id $TERMINAL
-	set $shutdown sudo -A shutdown -h now
-	set $reboot sudo -A reboot
+	set $shutdown shutdown -h now
+	set $reboot reboot
 	set $hibernate sudo -A systemctl suspend
 	# }}}
 
