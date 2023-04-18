@@ -95,8 +95,9 @@ core:
 
 text:
   special:
-    foreground: background
-    background: khaki
+    foreground: yellow
+    font-style: bold
+    # background: khaki
 
   todo:
     font-style: bold
