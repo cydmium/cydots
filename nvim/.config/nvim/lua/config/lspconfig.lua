@@ -50,7 +50,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-require("lspconfig")["pyright"].setup {capabilities = capabilities}
+require("lspconfig")["pyright"].setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    -- Disable formatting (i.e. fallback to null-ls)
+    client.server_capabilities.document_formatting = false
+  end,
+  settings = {
+    python = {analysis = {autoImportCompletions = true, typeCheckingMode = "basic"}}
+  }
+}
 require("lspconfig")["lua_ls"].setup {
   capabilities = capabilities,
   settings = {Lua = {workspace = {checkThirdParty = false}}}

@@ -1,9 +1,18 @@
 return {
+  -- Replaced with Iron for now
+  -- {
+  --   "dccsillag/magma-nvim",
+  --   build = ":UpdateRemotePlugins",
+  --   config = function()
+  --     require("config.magma")
+  --   end,
+  --   ft = {"python"}
+  -- },
+  {"Vimjas/vim-python-pep8-indent", ft = {"python"}},
   {
-    "dccsillag/magma-nvim",
-    build = ":UpdateRemotePlugins",
+    "Vigemus/iron.nvim",
     config = function()
-      require("config.magma")
+      require("config.iron")
     end,
     ft = {"python"}
   }

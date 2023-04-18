@@ -6,6 +6,6 @@ require"nvim-treesitter.configs".setup {
     disable = {"gitcommit", "fugitive", "tex", "latex"},
     additional_vim_regex_highlighting = {"latex"}
   },
-  indent = {enable = true},
+  indent = {enable = true, disable = {"python"}},
   autopairs = {enable = true}
 }

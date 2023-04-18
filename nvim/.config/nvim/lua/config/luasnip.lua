@@ -114,7 +114,7 @@ function dynamic_node_external_update(func_indx)
 end
 
 -- Keybinds
-vim.keymap.set("n", "<leader><leader>s",
+vim.keymap.set("n", "<leader>s",
                "<cmd>source ~/.config/nvim/lua/plugin_config/luasnip.lua<cr>")
 vim.keymap.set({"i", "s"}, "<c-l>", function()
   if ls.choice_active() then
