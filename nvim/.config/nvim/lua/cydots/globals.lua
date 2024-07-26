@@ -1,0 +1,10 @@
+o = vim.o
+bo = vim.bo
+wo = vim.wo
+g = vim.g
+api = vim.api
+opt = vim.opt
+set = vim.keymap.set
+create_autocmd = vim.api.nvim_create_autocmd
+create_augroup = vim.api.nvim_create_augroup
+lsp = vim.lsp
