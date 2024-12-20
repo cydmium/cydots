@@ -1,12 +1,13 @@
 function fish_prompt --description 'Write out the prompt'
     set -l last_status $status
+    set -l pyenv_version (pyenv version-name | string split ':')[1]
     
     set status_color (set_color normal)
     if test $last_status -ne 0
         set status_color (set_color $fish_color_error)
     end
     echo ''
-    string join '' -- (set_color blue) (prompt_pwd --full-length-dirs 2) (set_color normal)
+    string join '' -- (set_color blue) (prompt_pwd --full-length-dirs 2) (set_color 8D95A0) ' (' $pyenv_version ')'
     string join '' -- $status_color '>> ' (set_color normal)
 end
 

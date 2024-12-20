@@ -48,10 +48,18 @@ require("lspconfig")["lua_ls"].setup({
     Lua = {
       runtime = { version = "LuaJIT" },
       workspace = { checkThirdParty = false, library = vim.api.nvim_get_runtime_file("", true) },
+      diagnostics = {
+        disable = { "missing-fields", "missing-parameters" },
+      },
     },
   },
 })
+
 require("lspconfig")["clangd"].setup({
+  capabilities = capabilities,
+})
+
+require("lspconfig")["rust_analyzer"].setup({
   capabilities = capabilities,
 })
 

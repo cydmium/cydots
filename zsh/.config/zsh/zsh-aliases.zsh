@@ -1,8 +1,5 @@
 # Default to nvim if it's installed
 if command -v nvim > /dev/null 2>&1; then
-	alias e=nvim
-	alias v=nvim
-	alias vi=nvim
 	alias vim=nvim
 	alias vimdiff='nvim -d'
 fi
@@ -22,6 +19,3 @@ alias du='du -h'
 # Ask before overwrite
 alias mv='mv -i'
 alias cp='cp -i'
-
-# Todo
-alias todo='todo.sh'

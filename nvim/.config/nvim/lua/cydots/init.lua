@@ -28,5 +28,5 @@ require("lazy").setup({
   -- Use colorscheme when installing plugins
   install = { colorscheme = { "everforest" } },
   -- Automatically check for updates
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false },
 })

@@ -26,5 +26,5 @@ return {
     },
   },
   lazy = true,
-  ft = { "lua", "rust" },
+  ft = { "lua", "rust", "python", "c", "cpp" },
 }

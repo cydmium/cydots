@@ -60,6 +60,6 @@ set("n", "-", vim.cmd.Ex)
 set("n", "<c-d>", "<c-d>zz")
 set("n", "<c-u>", "<c-u>zz")
 set("n", "<c-f>", "<c-f>zz")
-set("n", "<c-b>", "<c-b>zz")
+-- set("n", "<c-b>", "<c-b>zz")
 
 set("n", "Q", "<nop>")
